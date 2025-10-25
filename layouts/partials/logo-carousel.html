@@ -1,0 +1,33 @@
+{{ $logos := where .Site.RegularPages "Type" "logos" }}
+{{ if $logos }}
+<div class="logo-carousel-wrapper">
+    <div class="logo-carousel">
+        <div class="logo-carousel-track" aria-hidden="true">
+            <!-- First set of logos -->
+            {{ range $logos }}
+            <div class="logo-item">
+                {{ if .Params.image }}
+                <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" loading="lazy">
+                {{ end }}
+            </div>
+            {{ end }}
+            <!-- Second set (duplicate) -->
+            {{ range $logos }}
+            <div class="logo-item">
+                {{ if .Params.image }}
+                <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" loading="lazy">
+                {{ end }}
+            </div>
+            {{ end }}
+            <!-- Third set (extra buffer for seamless loop) -->
+            {{ range $logos }}
+            <div class="logo-item">
+                {{ if .Params.image }}
+                <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" loading="lazy">
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</div>
+{{ end }}

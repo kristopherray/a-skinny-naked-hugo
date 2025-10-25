@@ -1,0 +1,45 @@
+{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- Article Header -->
+            <article>
+                <header class="mb-4">
+                    <h1 class="display-4">{{ .Title }}</h1>
+                    <div class="text-muted mb-4">
+                        <small>
+                            Published on {{ .Date.Format "January 2, 2006" }}
+                            {{ if .Params.author }}
+                            by {{ .Params.author }}
+                            {{ end }}
+                        </small>
+                    </div>
+                </header>
+
+                <!-- Article Content -->
+                <div class="article-content">
+                    {{ .Content }}
+                </div>
+
+                <!-- Article Footer -->
+                <footer class="mt-5 pt-4 border-top">
+                    {{ if .Params.tags }}
+                    <div class="mb-3">
+                        <strong>Tags:</strong>
+                        {{ range .Params.tags }}
+                        <span class="badge bg-secondary me-1">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+
+                    <a href="{{ "/" | relURL }}" class="btn btn-outline-secondary">
+                        &larr; Back to Home
+                    </a>
+                </footer>
+            </article>
+        </div>
+    </div>
+</div>
+{{ end }}

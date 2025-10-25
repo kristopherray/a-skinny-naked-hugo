@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {{ with .Params.relcanonical }}
+        <link rel="canonical" href="{{ . | relLangURL }}" itemprop="url" />
+    {{ else -}}
+        <link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
+    {{ end -}}
+
+    {{ if .Params.metaTitle }}
+        <title>{{ .Params.metaTitle | plainify }}</title>
+        <meta name="twitter:title" content="{{ .Params.metaTitle | plainify }}"/>
+        <meta property="og:title" content="{{ .Params.metaTitle | plainify }}"/>
+        <meta property="og:site_name" content="{{ .Site.Title | plainify }}"/>
+    {{ else }}
+        <title>{{ .Title | plainify | truncate 60 }} | {{ .Site.Title }}</title>
+        <meta name="twitter:title" content="{{ .Title | plainify | truncate 60 }} | {{ .Site.Title }}"/>
+        <meta property="og:title" content="{{ .Title | plainify | truncate 60 }} | {{ .Site.Title }}"/>
+        <meta property="og:site_name" content="{{ .Site.Title | plainify }}"/>
+    {{ end }}
+
+    {{ if .Params.metaDescription }}
+        <meta name="description" content="{{ .Params.metaDescription | plainify }}"/>
+        <meta property="og:description" content="{{ .Params.metaDescription | plainify }}"/>
+        <meta name="twitter:description" content="{{ .Params.metaDescription | plainify }}"/>
+    {{ else if .Description }}
+        <meta name="description" content="{{ .Description | plainify | truncate 155 }}"/>
+        <meta property="og:description" content="{{ .Description | plainify | truncate 155 }}"/>
+        <meta name="twitter:description" content="{{ .Description | plainify | truncate 155 }}"/>
+    {{ else }}
+        <meta name="description" content="{{ .Site.Params.description | plainify | truncate 155 }}"/>
+        <meta property="og:description" content="{{ .Site.Params.description | plainify | truncate 155 }}"/>
+        <meta name="twitter:description" content="{{ .Site.Params.description | plainify | truncate 155 }}"/>
+    {{ end }}
+
+    <meta property="og:url" content="{{ .Permalink }}"/>
+    <meta name="twitter:url" content="{{ .Permalink }}"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+
+    {{ if isset .Site.Params "twitter_user" }}
+        <meta name="twitter:site" content="@{{ .Site.Params.twitter_user }}" />
+        <meta name="twitter:creator" content="@{{ .Site.Params.twitter_user }}" />
+    {{ end }}
+
+    <!-- SiteBaseURL + Small Image (<1mb) Required for Twitter Card to Work -->
+    {{ if .Params.og_img }}
+        <meta property="og:image" content="{{ .Site.BaseURL }}{{ .Params.og_img }}"/>
+        <meta name="twitter:image" content="{{ .Site.BaseURL }}{{ .Params.og_img }}"/>
+    {{ else }}
+        <meta property="og:image" content="{{ .Site.BaseURL }}/img/og-img.png"/>
+        <meta name="twitter:image" content="{{ .Site.BaseURL }}/img/og-img.png"/>
+    {{ end }}
+
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="628"/>
+
+    <script src="/js/lazysizes.min.js" async=""></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom Styles (includes Bootstrap custom build) -->
+    {{ $sass := resources.Get "sass/style.scss" | toCSS | minify }}
+    <link rel="stylesheet" href="{{ $sass.RelPermalink }}">
+
+    <!-- Enable for NetlifyCMS -->
+    {{/*  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>  */}}
+
+    {{ block "head" . }}{{ end }}
+</head>
+<body {{ if .Params.id }}id="{{ .Params.id }}"{{ end }}>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
+            <ul class="socials">{{ partial "socials.html" . }}</ul>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ "/" | relURL }}">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p class="mb-0">&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle (includes Popper) - Local -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    {{ $js := resources.Get "js/plugins.js" }}
+    {{ $secureJS := $js | resources.Minify }}
+    <script src="{{ $secureJS.Permalink }}"></script>
+
+
+    <!-- GSAP Core + ScrollTrigger Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Register ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Initialize GSAP animations
+        function initGSAP() {
+            // Select all elements with data-gsap attribute
+            const gsapItems = document.querySelectorAll('[data-gsap]');
+
+            gsapItems.forEach((item) => {
+                const animationType = item.getAttribute('data-gsap') || 'fade';
+
+                // Animation configurations based on type
+                const animations = {
+                    'fade': { opacity: 0, y: 30 },
+                    'fade-up': { opacity: 0, y: 50 },
+                    'fade-down': { opacity: 0, y: -50 },
+                    'fade-left': { opacity: 0, x: 50 },
+                    'fade-right': { opacity: 0, x: -50 },
+                    'zoom-in': { opacity: 0, scale: 0.9 }
+                };
+
+                const fromState = animations[animationType] || animations['fade'];
+
+                gsap.from(item, {
+                    ...fromState,
+                    duration: 1.5,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top bottom-=200',
+                        toggleActions: 'play none none none',
+                        once: true
+                    }
+                });
+            });
+        }
+
+        // Initialize on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initGSAP);
+        } else {
+            initGSAP();
+        }
+
+        // Refresh ScrollTrigger when lazy images load
+        document.addEventListener('lazyloaded', function() {
+            ScrollTrigger.refresh();
+        });
+    </script>
+
+
+    {{ block "scripts" . }}{{ end }}
+</body>
+</html>

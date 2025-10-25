@@ -1,0 +1,191 @@
+<form accept-charset="UTF-8" action='{{ .Site.Params.form_endpoint }}' method="POST">
+
+    <input type="hidden" name="utm_source" value="">
+    <input type="hidden" name="utm_medium" value="">
+    <input type="hidden" name="utm_campaign" value="">
+
+    <div class="row">
+        <!-- Full Name -->
+        <div class="col col-12 labelToggle">
+            <label for="full_name" class="form-label">Full Name*</label>
+            <input type="text" id="full_name" class="form-control" name="full_name" placeholder="ex. John or Jane Doe" required>
+        </div>
+
+        <!-- First Name -->
+        <div class="col col-12 col-sm-6 labelToggle">
+            <label for="first_name" class="form-label">First Name*</label>
+            <input type="text" id="first_name" class="form-control" name="first_name" placeholder="ex. John or Jane" required>
+        </div>
+
+        <!-- Last Name -->
+        <div class="col col-12 col-sm-6 labelToggle">
+            <label for="last_name" class="form-label">Last Name*</label>
+            <input type="text" id="last_name" class="form-control" name="last_name" placeholder="ex. Doe" required>
+        </div>
+
+        <!-- Email Address -->
+        <div class="col col-12 col-sm-6 labelToggle">
+            <label for="email" class="form-label">Email Address*</label>
+            <input type="email" id="email" class="form-control" name="email" placeholder="ex. yourname@email.com" required>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="col col-12 col-sm-6 labelToggle">
+            <label for="phone" class="form-label">Phone Number*</label>
+            <input type="tel" id="phone" class="form-control" name="phone" placeholder="(123) 456-7890" required>
+        </div>
+
+        <!-- City -->
+        <div class="col col-12 col-sm-5 labelToggle">
+            <label for="city" class="form-label">City*</label>
+            <input type="text" id="city" class="form-control" name="city" placeholder="ex. Austin" required>
+        </div>
+
+        <!-- State -->
+        <div class="col col-12 col-sm-4 labelToggle">
+            <label for="state" class="form-label">State*</label>
+            <select name="state" id="state" class="form-select" required>
+            <option value=""></option>
+            <option value="AL">AL</option>
+            <option value="AK">AK</option>
+            <option value="AR">AR</option>
+            <option value="AZ">AZ</option>
+            <option value="CA">CA</option>
+            <option value="CO">CO</option>
+            <option value="CT">CT</option>
+            <option value="DC">DC</option>
+            <option value="DE">DE</option>
+            <option value="FL">FL</option>
+            <option value="GA">GA</option>
+            <option value="HI">HI</option>
+            <option value="IA">IA</option>
+            <option value="ID">ID</option>
+            <option value="IL">IL</option>
+            <option value="IN">IN</option>
+            <option value="KS">KS</option>
+            <option value="KY">KY</option>
+            <option value="LA">LA</option>
+            <option value="MA">MA</option>
+            <option value="MD">MD</option>
+            <option value="ME">ME</option>
+            <option value="MI">MI</option>
+            <option value="MN">MN</option>
+            <option value="MO">MO</option>
+            <option value="MS">MS</option>
+            <option value="MT">MT</option>
+            <option value="NC">NC</option>
+            <option value="NE">NE</option>
+            <option value="NH">NH</option>
+            <option value="NJ">NJ</option>
+            <option value="NM">NM</option>
+            <option value="NV">NV</option>
+            <option value="NY">NY</option>
+            <option value="ND">ND</option>
+            <option value="OH">OH</option>
+            <option value="OK">OK</option>
+            <option value="OR">OR</option>
+            <option value="PA">PA</option>
+            <option value="RI">RI</option>
+            <option value="SC">SC</option>
+            <option value="SD">SD</option>
+            <option value="TN">TN</option>
+            <option value="TX">TX</option>
+            <option value="UT">UT</option>
+            <option value="VT">VT</option>
+            <option value="VA">VA</option>
+            <option value="WA">WA</option>
+            <option value="WI">WI</option>
+            <option value="WV">WV</option>
+            <option value="WY">WY</option>
+            <option value="AS">AS</option>
+            <option value="GU">GU</option>
+            <option value="MP">MP</option>
+            <option value="PR">PR</option>
+            <option value="UM">UM</option>
+            <option value="VI">VI</option>
+            <option value="AA">AA</option>
+            <option value="AP">AP</option>
+            <option value="AE">AE</option>
+        </select>
+        </div>
+
+        <!-- Zip Code -->
+        <div class="col col-12 col-sm-3 labelToggle">
+            <label for="zip" class="form-label">Zip Code*</label>
+            <input type="text" id="zip" class="form-control" name="zipcode" placeholder="12345" required>
+        </div>
+
+        <!-- Message -->
+        <div class="col col-12 labelToggle">
+            <label for="message" class="form-label">Inquire...</label>
+            <textarea name="message" id="message" class="form-control" rows="5" placeholder="What can I help you with?"></textarea>
+        </div>
+
+        <!-- Checkboxes Section -->
+        <div class="col-12 mb-3">
+            <label class="form-label d-block">How would you like to help?</label>
+
+            <div class="row">
+                <div class="col-6 col-sm-4 mb-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="phone_banking" name="phone_banking" value="checkbox">
+                        <label class="form-check-label" for="phone_banking">
+                            Phone Banking
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-4 mb-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="block_walking" name="block_walking" value="checkbox">
+                        <label class="form-check-label" for="block_walking">
+                            Block Walking
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-4 mb-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="house_party" name="house_party" value="checkbox">
+                        <label class="form-check-label" for="house_party">
+                            House Party
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-4 mb-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="yard_sign" name="yard_sign" value="checkbox">
+                        <label class="form-check-label" for="yard_sign">
+                            Yard Sign
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-4 mb-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="social_media" name="social_media" value="checkbox">
+                        <label class="form-check-label" for="social_media">
+                            Social Media
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-6 col-sm-4 mb-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="fundraise" name="fundraise" value="checkbox">
+                        <label class="form-check-label" for="fundraise">
+                            Fundraise
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-lg">Send Inquiry</button>
+        </div>
+    </div>
+
+</form>

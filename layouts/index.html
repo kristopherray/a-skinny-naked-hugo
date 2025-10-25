@@ -1,0 +1,95 @@
+{{ define "main" }}
+<section id="banner">
+
+    {{if .Params.banner_image}} 
+    <div class="banner-image bg-image"><img class="lazyload" data-src="{{.Params.banner_image}}" alt="{{ .Site.Params.Title }} {{ .Title }} Banner Background Image" /></div>
+    {{end}}
+
+    {{if .Params.banner_video}} 
+    <div class="banner-image bg-image video-wrapper">
+        <!-- Vimeo -->
+        <iframe title="{{ .Params.Site.Title }} Home Banner Background Video" class="lazyload" data-src="https://player.vimeo.com/video/{{.Params.banner_video}}?background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <script defer src="https://player.vimeo.com/api/player.js"></script>
+
+       
+    </div>
+    {{end}}
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="row">
+            <div class="col-12 text-center">
+                    
+                <h1>{{ .Title }}</h1>
+                <p>{{ .Description }}</p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Pop Up
+                </button>
+
+            </div>
+        </div>
+    
+        {{ if .Content}}
+        <!-- Content Section -->
+        <div class="row mb-5">
+            <div class="col-md-12">
+                {{ .Content }}
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Placeholder Info</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This is some placeholder information in the popup modal.<br>
+        You can add any content here (forms, text, images, etc.).
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Logo Carousel -->
+{{ partial "logo-carousel.html" . }}
+
+{{ partial "page-sections.html" .}}
+
+<div class="container mt-5">
+    <!-- Recent Posts -->
+    {{ $posts := where .Site.RegularPages "Type" "posts" }}
+    {{ if $posts }}
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h2>Recent Posts</h2>
+        </div>
+        {{ range first 6 $posts }}
+        <div class="col-12 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ .Title }}</h5>
+                    <p class="card-text text-muted">
+                        <small>{{ .Date.Format "January 2, 2006" }}</small>
+                    </p>
+                    {{ if .Summary }}
+                    <p class="card-text">{{ .Summary }}</p>
+                    {{ end }}
+                    <a href="{{ .Permalink }}" class="btn btn-sm btn-outline-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>
+{{ end }}
