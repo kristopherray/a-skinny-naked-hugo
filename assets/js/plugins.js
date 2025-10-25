@@ -1,13 +1,26 @@
-// Form Focus (Vanilla JS)
+// Form Focus (Vanilla JS) - mobile/touch compatible
 document.querySelectorAll('.labelToggle input, .labelToggle textarea, .labelToggle select').forEach(function(elem) {
     function addToggleLabel() {
         if (elem.parentElement) {
             elem.parentElement.classList.add("toggle-label");
         }
     }
-    ['focus', 'change', 'keyup', 'blur', 'input'].forEach(function(evt) {
-        elem.addEventListener(evt, addToggleLabel);
+    // List of events including touch events for mobile compatibility
+    ['focus', 'change', 'keyup', 'blur', 'input', 'touchstart', 'touchend'].forEach(function(evt) {
+        elem.addEventListener(evt, addToggleLabel, false);
     });
+
+    // Extra handling for autofill (especially on mobile Chrome/Safari)
+    window.addEventListener('pageshow', function() {
+        if (elem.value && elem.parentElement) {
+            elem.parentElement.classList.add("toggle-label");
+        }
+    });
+
+    // On page load, if prefilled (autofill), add class
+    if (elem.value && elem.parentElement) {
+        elem.parentElement.classList.add("toggle-label");
+    }
 });
 
 // UTM Tracking
