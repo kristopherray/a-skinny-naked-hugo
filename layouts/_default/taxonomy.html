@@ -17,7 +17,7 @@
                 {{ end }}
             </header>
 
-            <!-- List of Terms (Tags, Categories, etc.) -->
+            <!-- Check if this is a taxonomy list page (shows all terms) -->
             {{ if .Data.Terms }}
             <div class="row mb-5">
                 <div class="col-12">
@@ -47,6 +47,33 @@
                 </div>
                 {{ end }}
             </div>
+
+            <!-- Check if this is a term page (shows posts with specific term) -->
+            {{ else if .Pages }}
+            <div class="row">
+                {{ range .Pages }}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <article class="card h-100">
+                        {{ with .Params.image }}
+                        <img src="{{ . }}" class="card-img-top" alt="{{ $.Title }}">
+                        {{ end }}
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ .Permalink }}" class="text-decoration-none">{{ .Title }}</a>
+                            </h5>
+                            {{ with .Description }}
+                            <p class="card-text text-muted">{{ . }}</p>
+                            {{ end }}
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">{{ .Date.Format "January 2, 2006" }}</small>
+                                <a href="{{ .Permalink }}" class="btn btn-sm btn-primary">Read More</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                {{ end }}
+            </div>
+
             {{ else }}
             <div class="alert alert-info">
                 <p class="mb-0">No {{ .Title | lower }} found.</p>
