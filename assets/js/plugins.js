@@ -1,70 +1,60 @@
-// Form Focus (Vanilla JS) - improved for mobile/touch compatibility and autofill
-(function() {
-    function toggleLabelClass(elem) {
-        if (!elem || !elem.parentElement) return;
-        if (elem.value || elem === document.activeElement) {
+// Form Focus (Vanilla JS) - mobile/touch compatible
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.labelToggle input, .labelToggle textarea, .labelToggle select').forEach(function(elem) {
+        function addToggleLabel() {
+            if (elem.parentElement) {
+                elem.parentElement.classList.add("toggle-label");
+            }
+        }
+        
+        function removeToggleLabel() {
+            if (elem.parentElement && !elem.value) {
+                elem.parentElement.classList.remove("toggle-label");
+            }
+        }
+
+        // Desktop events
+        elem.addEventListener('focus', addToggleLabel, false);
+        elem.addEventListener('blur', removeToggleLabel, false);
+        elem.addEventListener('input', addToggleLabel, false);
+        elem.addEventListener('change', addToggleLabel, false);
+        
+        // Mobile touch events - use click for better mobile support
+        elem.addEventListener('click', addToggleLabel, false);
+        elem.addEventListener('touchstart', addToggleLabel, false);
+        
+        // Handle mobile keyboard events
+        elem.addEventListener('keyup', addToggleLabel, false);
+        elem.addEventListener('keydown', addToggleLabel, false);
+
+        // Extra handling for autofill (especially on mobile Chrome/Safari)
+        window.addEventListener('pageshow', function() {
+            if (elem.value && elem.parentElement) {
+                elem.parentElement.classList.add("toggle-label");
+            }
+        });
+
+        // On page load, if prefilled (autofill), add class
+        if (elem.value && elem.parentElement) {
             elem.parentElement.classList.add("toggle-label");
-        } else {
-            elem.parentElement.classList.remove("toggle-label");
         }
-    }
-
-    function handleEvent(e) {
-        toggleLabelClass(e.target);
-    }
-
-    function setupField(elem) {
-        // On initial load, set class if has value/autofill (including iOS)
+        
+        // Additional mobile-specific handling
+        // Handle iOS Safari autofill
+        elem.addEventListener('animationstart', function(e) {
+            if (e.animationName === 'onAutoFillStart') {
+                addToggleLabel();
+            }
+        }, false);
+        
+        // Fallback for mobile browsers that don't support animation events
         setTimeout(function() {
-            toggleLabelClass(elem);
-        }, 50);
-
-        // Handle real-time changes, focus, touch, etc.
-        elem.addEventListener('focus', handleEvent, false);
-        elem.addEventListener('blur', handleEvent, false);
-        elem.addEventListener('input', handleEvent, false);
-        elem.addEventListener('change', handleEvent, false);
-
-        // Extra: tap/click on field container should focus the input (for mobile label tap)
-        if (elem.parentElement && !elem.parentElement._labelToggleBound) {
-            elem.parentElement.addEventListener('touchstart', function(e) {
-                // Prevent double-trigger if direct on input
-                if (e.target === elem) return;
-                elem.focus();
-                setTimeout(function() {
-                    toggleLabelClass(elem);
-                }, 20);
-            }, false);
-            elem.parentElement.addEventListener('mousedown', function(e) {
-                if (e.target === elem) return;
-                elem.focus();
-                setTimeout(function() {
-                    toggleLabelClass(elem);
-                }, 20);
-            }, false);
-            elem.parentElement._labelToggleBound = true;
-        }
-    }
-
-    // Apply setup to all inputs (use event delegation for dynamically injected fields)
-    function applyToAllFields() {
-        document.querySelectorAll('.labelToggle input, .labelToggle textarea, .labelToggle select').forEach(setupField);
-    }
-    // On DOM ready
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", applyToAllFields);
-    } else {
-        applyToAllFields();
-    }
-
-    // Ensure autofill-covered fields get labeled (works for Chrome, Safari mobile+desktop)
-    window.addEventListener('pageshow', function() {
-        setTimeout(applyToAllFields, 80); // allow autofill to populate first
+            if (elem.value && elem.parentElement) {
+                elem.parentElement.classList.add("toggle-label");
+            }
+        }, 100);
     });
-    window.addEventListener('load', function() {
-        setTimeout(applyToAllFields, 120);
-    });
-})();
+});
 
 // UTM Tracking
 var queryForm=function(e){var t=!(!e||!e.reset)&&e.reset,n=window.location.toString().split("?");if(n.length>1){var o=n[1].split("&");for(s in o){var r=o[s].split("=");(t||null===sessionStorage.getItem(r[0]))&&sessionStorage.setItem(r[0],decodeURIComponent(r[1]))}}for(var i=document.querySelectorAll("input[type=hidden], input[type=text]"),s=0;s<i.length;s++){var a=sessionStorage.getItem(i[s].name);a&&(document.getElementsByName(i[s].name)[0].value=a)}};setTimeout(function(){queryForm()},3e3);

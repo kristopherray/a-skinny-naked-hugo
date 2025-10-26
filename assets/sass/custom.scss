@@ -53,6 +53,17 @@
     }
 }
 
+// Mobile autofill detection animation
+@keyframes onAutoFillStart {
+    from { /**/ }
+    to { /**/ }
+}
+
+input:-webkit-autofill {
+    animation-name: onAutoFillStart;
+    animation-duration: 0.001s;
+}
+
 #section-1 {
     color:#333;
     background: #f3f3f3;
