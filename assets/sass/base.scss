@@ -1,4 +1,5 @@
-/* Custom Layout Overrides */
+/* Base Layout Styles and Setup */
+
 html, body {
     overflow-x: hidden;
     font-size:$base-fontsize;
@@ -14,6 +15,16 @@ section {
         position: relative;
         z-index: 1;
     }
+}
+
+// Prevent Bootstrap modal from adding padding-right to body
+body.modal-open {
+  padding-right: 0 !important;
+}
+
+// Also prevent padding on fixed navbar if you have one
+.navbar.fixed-top {
+  padding-right: 0 !important;
 }
 
 footer {
@@ -101,7 +112,7 @@ form {
   
       label {
         position:absolute;
-        font-size:1.25rem;
+        font-size:18px;
         line-height:$line-height-desktop;
         left:8px + $input-padding-left;
         pointer-events: none;

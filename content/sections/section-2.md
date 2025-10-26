@@ -3,7 +3,7 @@ title: Section 2
 weight: 3
 id: section-2
 position: justify-content-start align-content-center
-size: col-12 col-sm-6 col-md-5
+size: col-12 col-md-6
 image: /img/banner.png
 bg_video: 107065688
 section_categories:
