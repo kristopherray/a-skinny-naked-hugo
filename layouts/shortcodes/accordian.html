@@ -1,0 +1,21 @@
+{{- $accordionId := .Get "id" | default "faqAccordion" -}}
+{{- $faqs := sort (where .Site.RegularPages "Section" "faqs") "Params.weight" -}}
+
+<div class="accordion mb-3" id="{{ $accordionId }}">
+  {{- range $index, $faq := $faqs -}}
+    {{- $collapseId := printf "collapse%d" $index -}}
+    {{- $isFirst := eq $index 0 -}}
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button{{ if not $isFirst }} collapsed{{ end }}" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $collapseId }}" aria-expanded="{{ if $isFirst }}true{{ else }}false{{ end }}" aria-controls="{{ $collapseId }}">
+          {{ $faq.Title }}
+        </button>
+      </h2>
+      <div id="{{ $collapseId }}" class="accordion-collapse collapse{{ if $isFirst }} show{{ end }}" data-bs-parent="#{{ $accordionId }}">
+        <div class="accordion-body">
+          {{ $faq.Content }}
+        </div>
+      </div>
+    </div>
+  {{- end -}}
+</div>
