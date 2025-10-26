@@ -57,9 +57,23 @@
     <meta property="og:image:width" content="1200"/>
     <meta property="og:image:height" content="628"/>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Resource hints for external resources -->
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://use.typekit.net">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
+    <!-- Adobe TypeKit with font-display optimization -->
     <link rel="stylesheet" href="https://use.typekit.net/fej5sdm.css">
+    <style>
+        /* Force font-display: swap for TypeKit fonts */
+        @font-face {
+            font-display: swap;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Custom Styles (includes Bootstrap custom build) -->
     {{ $sass := resources.Get "sass/style.scss" | toCSS | minify }}
@@ -89,59 +103,71 @@
     <script src="{{ $secureJS.Permalink }}"></script>
 
 
-    <!-- GSAP Core + ScrollTrigger Plugin -->
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <!-- GSAP Core + ScrollTrigger Plugin (deferred for performance) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
     <script>
-        // Register ScrollTrigger plugin
-        gsap.registerPlugin(ScrollTrigger);
+        // Wait for GSAP to load (since it's deferred), then initialize
+        function initGSAPWhenReady() {
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+                // GSAP not loaded yet, wait a bit
+                setTimeout(initGSAPWhenReady, 50);
+                return;
+            }
 
-        // Initialize GSAP animations
-        function initGSAP() {
-            // Select all elements with data-gsap attribute
-            const gsapItems = document.querySelectorAll('[data-gsap]');
+            // Register ScrollTrigger plugin
+            gsap.registerPlugin(ScrollTrigger);
 
-            gsapItems.forEach((item) => {
-                const animationType = item.getAttribute('data-gsap') || 'fade';
+            // Initialize GSAP animations
+            function initGSAP() {
+                // Select all elements with data-gsap attribute
+                const gsapItems = document.querySelectorAll('[data-gsap]');
 
-                // Animation configurations based on type
-                const animations = {
-                    'fade': { opacity: 0, y: 30 },
-                    'fade-up': { opacity: 0, y: 50 },
-                    'fade-down': { opacity: 0, y: -50 },
-                    'fade-left': { opacity: 0, x: 50 },
-                    'fade-right': { opacity: 0, x: -50 },
-                    'zoom-in': { opacity: 0, scale: 0.9 }
-                };
+                gsapItems.forEach((item) => {
+                    const animationType = item.getAttribute('data-gsap') || 'fade';
 
-                const fromState = animations[animationType] || animations['fade'];
+                    // Animation configurations based on type
+                    const animations = {
+                        'fade': { opacity: 0, y: 30 },
+                        'fade-up': { opacity: 0, y: 50 },
+                        'fade-down': { opacity: 0, y: -50 },
+                        'fade-left': { opacity: 0, x: 50 },
+                        'fade-right': { opacity: 0, x: -50 },
+                        'zoom-in': { opacity: 0, scale: 0.9 }
+                    };
 
-                gsap.from(item, {
-                    ...fromState,
-                    duration: 1.5,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: item,
-                        start: 'top bottom-=200',
-                        toggleActions: 'play none none none',
-                        once: true
-                    }
+                    const fromState = animations[animationType] || animations['fade'];
+
+                    gsap.from(item, {
+                        ...fromState,
+                        duration: 1.5,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: item,
+                            start: 'top bottom-=200',
+                            toggleActions: 'play none none none',
+                            once: true
+                        }
+                    });
                 });
+            }
+
+            // Initialize on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initGSAP);
+            } else {
+                initGSAP();
+            }
+
+            // Refresh ScrollTrigger when images load
+            window.addEventListener('load', function() {
+                ScrollTrigger.refresh();
             });
         }
 
-        // Initialize on DOM ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initGSAP);
-        } else {
-            initGSAP();
-        }
-
-        // Refresh ScrollTrigger when images load
-        window.addEventListener('load', function() {
-            ScrollTrigger.refresh();
-        });
+        // Start checking for GSAP
+        initGSAPWhenReady();
     </script>
 
 
