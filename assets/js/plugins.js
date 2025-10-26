@@ -1,40 +1,60 @@
-// Form Focus - Mobile & Desktop Compatible
+// Form Focus - Mobile & Desktop Compatible with Debug
 (function() {
+    'use strict';
+
+    var DEBUG = true; // Set to false to disable console logs
+
+    function log(message, data) {
+        if (DEBUG) {
+            console.log('[Form Labels] ' + message, data || '');
+        }
+    }
+
     function initFormLabels() {
+        log('Initializing form labels...');
+
         var formElements = document.querySelectorAll('.labelToggle input, .labelToggle textarea, .labelToggle select');
+        log('Found elements:', formElements.length);
 
         if (formElements.length === 0) {
-            // If elements not found, retry after a short delay
+            log('No elements found, retrying in 100ms');
             setTimeout(initFormLabels, 100);
             return;
         }
 
-        formElements.forEach(function(element) {
-            // Function to toggle label based on focus or content
-            function handleLabelToggle() {
+        formElements.forEach(function(element, index) {
+            log('Setting up element ' + index, element.tagName + '#' + element.id);
+
+            // Function to toggle label
+            function handleLabelToggle(event) {
+                log('Event fired: ' + event.type + ' on ' + element.id);
                 var parent = element.closest('.labelToggle');
                 if (parent) {
                     parent.classList.add('toggle-label');
+                    log('Added toggle-label class to parent of ' + element.id);
+                } else {
+                    log('ERROR: No parent found for ' + element.id);
                 }
             }
 
-            // Add all event listeners
-            element.addEventListener('focus', handleLabelToggle, false);
-            element.addEventListener('input', handleLabelToggle, false);
-            element.addEventListener('change', handleLabelToggle, false);
-            element.addEventListener('keyup', handleLabelToggle, false);
-            element.addEventListener('blur', handleLabelToggle, false);
+            // Add all event listeners with passive: false for mobile
+            var events = ['focus', 'input', 'change', 'keyup', 'blur', 'touchstart', 'click'];
+            events.forEach(function(eventType) {
+                element.addEventListener(eventType, handleLabelToggle, { passive: true });
+            });
 
-            // Mobile-specific touch events
-            element.addEventListener('touchstart', handleLabelToggle, false);
-            element.addEventListener('click', handleLabelToggle, false);
+            log('Event listeners added to ' + element.id);
         });
+
+        log('Form labels initialization complete');
     }
 
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
+        log('DOM still loading, waiting...');
         document.addEventListener('DOMContentLoaded', initFormLabels);
     } else {
+        log('DOM already loaded, initializing immediately');
         initFormLabels();
     }
 })();
