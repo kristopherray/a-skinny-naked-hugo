@@ -1,15 +1,43 @@
-// Form Focus
-document.addEventListener('DOMContentLoaded', function() {
-    var formElements = document.querySelectorAll('.labelToggle input, .labelToggle textarea, .labelToggle select');
+// Form Focus - Mobile & Desktop Compatible
+(function() {
+    function initFormLabels() {
+        var formElements = document.querySelectorAll('.labelToggle input, .labelToggle textarea, .labelToggle select');
 
-    formElements.forEach(function(element) {
-        ['focus', 'change', 'keyup', 'blur', 'input'].forEach(function(eventType) {
-            element.addEventListener(eventType, function() {
-                this.parentElement.classList.add('toggle-label');
-            });
+        if (formElements.length === 0) {
+            // If elements not found, retry after a short delay
+            setTimeout(initFormLabels, 100);
+            return;
+        }
+
+        formElements.forEach(function(element) {
+            // Function to toggle label based on focus or content
+            function handleLabelToggle() {
+                var parent = element.closest('.labelToggle');
+                if (parent) {
+                    parent.classList.add('toggle-label');
+                }
+            }
+
+            // Add all event listeners
+            element.addEventListener('focus', handleLabelToggle, false);
+            element.addEventListener('input', handleLabelToggle, false);
+            element.addEventListener('change', handleLabelToggle, false);
+            element.addEventListener('keyup', handleLabelToggle, false);
+            element.addEventListener('blur', handleLabelToggle, false);
+
+            // Mobile-specific touch events
+            element.addEventListener('touchstart', handleLabelToggle, false);
+            element.addEventListener('click', handleLabelToggle, false);
         });
-    });
-});
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFormLabels);
+    } else {
+        initFormLabels();
+    }
+})();
 // UTM Tracking
 var queryForm=function(e){var t=!(!e||!e.reset)&&e.reset,n=window.location.toString().split("?");if(n.length>1){var o=n[1].split("&");for(s in o){var r=o[s].split("=");(t||null===sessionStorage.getItem(r[0]))&&sessionStorage.setItem(r[0],decodeURIComponent(r[1]))}}for(var i=document.querySelectorAll("input[type=hidden], input[type=text]"),s=0;s<i.length;s++){var a=sessionStorage.getItem(i[s].name);a&&(document.getElementsByName(i[s].name)[0].value=a)}};setTimeout(function(){queryForm()},3e3);
 
