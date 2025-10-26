@@ -11,19 +11,19 @@
 
                     {{ if .Params.image }}
                     <div class="bg-image">
-                        <img data-src='{{ .Params.image }}' class="lazyload img-fluid" alt="{{ .Site.Title }} - {{ .Title }} Image">
+                        <img src='{{ .Params.image }}' class="img-fluid" alt="{{ .Site.Title }} - {{ .Title }} Image" loading="lazy">
                     </div>
                     {{end}}
 
                     {{ if .Params.vimeobg }}
-                    <div class="video-wrapper bg-image"><iframe src="https://player.vimeo.com/video/{{.Params.vimeobg}}?background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><script src="https://player.vimeo.com/api/player.js"></script></div>
+                    <div class="video-wrapper bg-image"><iframe src="https://player.vimeo.com/video/{{.Params.vimeobg}}?background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><script src="https://player.vimeo.com/api/player.js"></script></div>
                     {{end}}
 
                     <div class="container">
                         <div class="row {{ .Params.position }} ">
                             {{if .Params.section_image}}
                             <div class="col sectionImgCol gsap-item" data-gsap="fade">
-                                <img data-src="{{.Params.section_image}}" class="lazyload" alt="{{ .Title }} {{ .Params.Site.Title }} Section Image"/>
+                                <img src="{{.Params.section_image}}" alt="{{ .Title }} {{ .Params.Site.Title }} Section Image" loading="lazy"/>
                             </div>
                             {{end}}
                             <div class="col col-12 sectionColTxt {{ .Params.size }} gsap-item" data-gsap="fade">

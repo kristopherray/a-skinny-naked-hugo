@@ -57,8 +57,6 @@
     <meta property="og:image:width" content="1200"/>
     <meta property="og:image:height" content="628"/>
 
-    <script src="/js/lazysizes.min.js" async=""></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Custom Styles (includes Bootstrap custom build) -->
@@ -159,8 +157,8 @@
             initGSAP();
         }
 
-        // Refresh ScrollTrigger when lazy images load
-        document.addEventListener('lazyloaded', function() {
+        // Refresh ScrollTrigger when images load
+        window.addEventListener('load', function() {
             ScrollTrigger.refresh();
         });
     </script>

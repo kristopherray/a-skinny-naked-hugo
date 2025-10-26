@@ -1,14 +1,14 @@
 {{ define "main" }}
 <section id="banner">
 
-    {{if .Params.banner_image}} 
-    <div class="banner-image bg-image"><img class="lazyload" data-src="{{.Params.banner_image}}" alt="{{ .Site.Params.Title }} {{ .Title }} Banner Background Image" /></div>
+    {{if .Params.banner_image}}
+    <div class="banner-image bg-image"><img src="{{.Params.banner_image}}" alt="{{ .Site.Params.Title }} {{ .Title }} Banner Background Image" /></div>
     {{end}}
 
-    {{if .Params.banner_video}} 
+    {{if .Params.banner_video}}
     <div class="banner-image bg-image video-wrapper">
         <!-- Vimeo -->
-        <iframe title="{{ .Params.Site.Title }} Home Banner Background Video" class="lazyload" data-src="https://player.vimeo.com/video/{{.Params.banner_video}}?background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <iframe title="{{ .Params.Site.Title }} Home Banner Background Video" src="https://player.vimeo.com/video/{{.Params.banner_video}}?background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         <script defer src="https://player.vimeo.com/api/player.js"></script>
     </div>
     {{end}}
