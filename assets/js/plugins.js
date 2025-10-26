@@ -45,10 +45,22 @@ function initFormLabels() {
             addToggleLabel();
         }, false);
         
-        elem.addEventListener('touchstart', function() {
+        // Mobile touch events with proper handling
+        elem.addEventListener('touchstart', function(e) {
             console.log('Touchstart event triggered on:', elem);
+            e.preventDefault(); // Prevent default touch behavior
             addToggleLabel();
-        }, false);
+            // Force focus on mobile
+            setTimeout(function() {
+                elem.focus();
+            }, 10);
+        }, { passive: false });
+        
+        elem.addEventListener('touchend', function(e) {
+            console.log('Touchend event triggered on:', elem);
+            e.preventDefault();
+            addToggleLabel();
+        }, { passive: false });
         
         // Handle mobile keyboard events
         elem.addEventListener('keyup', function() {
@@ -59,6 +71,31 @@ function initFormLabels() {
         elem.addEventListener('keydown', function() {
             console.log('Keydown event triggered on:', elem);
             addToggleLabel();
+        }, false);
+        
+        // Additional mobile-specific events
+        elem.addEventListener('focusin', function() {
+            console.log('Focusin event triggered on:', elem);
+            addToggleLabel();
+        }, false);
+        
+        elem.addEventListener('focusout', function() {
+            console.log('Focusout event triggered on:', elem);
+            removeToggleLabel();
+        }, false);
+        
+        // Handle mobile input events more aggressively (duplicate removed)
+        
+        // Mobile-specific: handle when virtual keyboard appears
+        elem.addEventListener('focus', function() {
+            console.log('Focus event triggered on:', elem);
+            addToggleLabel();
+            // Additional mobile focus handling
+            if (elem.type === 'tel' || elem.type === 'email' || elem.type === 'text') {
+                setTimeout(function() {
+                    addToggleLabel();
+                }, 100);
+            }
         }, false);
 
         // Extra handling for autofill (especially on mobile Chrome/Safari)
