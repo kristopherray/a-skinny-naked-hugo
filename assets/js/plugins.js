@@ -1,129 +1,24 @@
-// Form Focus (Vanilla JS) - mobile/touch compatible
+// Form Focus (Vanilla JS) - Direct conversion from jQuery
 function initFormLabels() {
-    const elements = document.querySelectorAll('.labelToggle input, .labelToggle textarea, .labelToggle select');
-    console.log('Found form elements:', elements.length);
-    
-    elements.forEach(function(elem) {
-        function addToggleLabel() {
-            console.log('Adding toggle-label class to:', elem.parentElement);
+    document.querySelectorAll('.labelToggle input, .labelToggle textarea, .labelToggle select').forEach(function(elem) {
+        // Single event handler that adds the class (just like jQuery)
+        function handleFormEvent() {
             if (elem.parentElement) {
                 elem.parentElement.classList.add("toggle-label");
             }
         }
         
-        function removeToggleLabel() {
-            console.log('Removing toggle-label class from:', elem.parentElement);
-            if (elem.parentElement && !elem.value) {
-                elem.parentElement.classList.remove("toggle-label");
-            }
-        }
-
-        // Desktop events
-        elem.addEventListener('focus', function() {
-            console.log('Focus event triggered on:', elem);
-            addToggleLabel();
-        }, false);
+        // Use the exact same events as the jQuery version
+        elem.addEventListener('focus', handleFormEvent, false);
+        elem.addEventListener('change', handleFormEvent, false);
+        elem.addEventListener('keyup', handleFormEvent, false);
+        elem.addEventListener('blur', handleFormEvent, false);
+        elem.addEventListener('input', handleFormEvent, false);
         
-        elem.addEventListener('blur', function() {
-            console.log('Blur event triggered on:', elem);
-            removeToggleLabel();
-        }, false);
-        
-        elem.addEventListener('input', function() {
-            console.log('Input event triggered on:', elem);
-            addToggleLabel();
-        }, false);
-        
-        elem.addEventListener('change', function() {
-            console.log('Change event triggered on:', elem);
-            addToggleLabel();
-        }, false);
-        
-        // Mobile touch events - use click for better mobile support
-        elem.addEventListener('click', function() {
-            console.log('Click event triggered on:', elem);
-            addToggleLabel();
-        }, false);
-        
-        // Mobile touch events with proper handling
-        elem.addEventListener('touchstart', function(e) {
-            console.log('Touchstart event triggered on:', elem);
-            e.preventDefault(); // Prevent default touch behavior
-            addToggleLabel();
-            // Force focus on mobile
-            setTimeout(function() {
-                elem.focus();
-            }, 10);
-        }, { passive: false });
-        
-        elem.addEventListener('touchend', function(e) {
-            console.log('Touchend event triggered on:', elem);
-            e.preventDefault();
-            addToggleLabel();
-        }, { passive: false });
-        
-        // Handle mobile keyboard events
-        elem.addEventListener('keyup', function() {
-            console.log('Keyup event triggered on:', elem);
-            addToggleLabel();
-        }, false);
-        
-        elem.addEventListener('keydown', function() {
-            console.log('Keydown event triggered on:', elem);
-            addToggleLabel();
-        }, false);
-        
-        // Additional mobile-specific events
-        elem.addEventListener('focusin', function() {
-            console.log('Focusin event triggered on:', elem);
-            addToggleLabel();
-        }, false);
-        
-        elem.addEventListener('focusout', function() {
-            console.log('Focusout event triggered on:', elem);
-            removeToggleLabel();
-        }, false);
-        
-        // Handle mobile input events more aggressively (duplicate removed)
-        
-        // Mobile-specific: handle when virtual keyboard appears
-        elem.addEventListener('focus', function() {
-            console.log('Focus event triggered on:', elem);
-            addToggleLabel();
-            // Additional mobile focus handling
-            if (elem.type === 'tel' || elem.type === 'email' || elem.type === 'text') {
-                setTimeout(function() {
-                    addToggleLabel();
-                }, 100);
-            }
-        }, false);
-
-        // Extra handling for autofill (especially on mobile Chrome/Safari)
-        window.addEventListener('pageshow', function() {
-            if (elem.value && elem.parentElement) {
-                elem.parentElement.classList.add("toggle-label");
-            }
-        });
-
-        // On page load, if prefilled (autofill), add class
+        // Handle autofill on page load
         if (elem.value && elem.parentElement) {
             elem.parentElement.classList.add("toggle-label");
         }
-        
-        // Additional mobile-specific handling
-        // Handle iOS Safari autofill
-        elem.addEventListener('animationstart', function(e) {
-            if (e.animationName === 'onAutoFillStart') {
-                addToggleLabel();
-            }
-        }, false);
-        
-        // Fallback for mobile browsers that don't support animation events
-        setTimeout(function() {
-            if (elem.value && elem.parentElement) {
-                elem.parentElement.classList.add("toggle-label");
-            }
-        }, 100);
     });
 }
 
