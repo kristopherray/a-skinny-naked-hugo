@@ -1,4 +1,21 @@
 {{ $currentPage := . }}
 {{ range .Site.Menus.main }}
-<li class='nav-item {{if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} current-menu-item{{end}}'> <a class="nav-link" title="{{ .Name }}" href="{{ .URL }}">{{ .Name }}</a> </li>
-{{ end }} 
+  {{ if .HasChildren }}
+    {{/* Menu item with dropdown */}}
+    <li class='nav-item dropdown{{if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} current-menu-item{{end}}'>
+      <a class="nav-link dropdown-toggle" href="{{ .URL }}" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="{{ .Name }}">
+        {{ .Name | safeHTML }}
+      </a>
+      <ul class="dropdown-menu">
+        {{ range .Children }}
+          <li><a class='dropdown-item{{if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{end}}' href="{{ .URL }}" title="{{ .Name }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </li>
+  {{ else }}
+    {{/* Regular menu item */}}
+    <li class='nav-item{{if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} current-menu-item{{end}}'>
+      <a class="nav-link" href="{{ .URL }}" title="{{ .Name }}">{{ .Name | safeHTML }}</a>
+    </li>
+  {{ end }}
+{{ end }}

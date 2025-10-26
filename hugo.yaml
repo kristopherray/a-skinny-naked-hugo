@@ -52,6 +52,11 @@ menu:
     - name: News
       url: /posts/
       weight: -10
+      identifier: news
+    - name: Featured In
+      url: /categories/featured-in/
+      weight: -15
+      parent: news
     - name: Contact
       url: /contact/
       weight: -5
