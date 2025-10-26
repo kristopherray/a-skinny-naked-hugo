@@ -1,48 +1,26 @@
+// Form Focus - Test if script loads
+alert('PLUGINS.JS LOADED ON LINE 2');
+
 // Form Focus - Mobile & Desktop Compatible
-// Create debug div immediately - before everything else
-var debugDiv = document.createElement('div');
-debugDiv.id = 'mobile-debug';
-debugDiv.style.cssText = 'position:fixed;top:0;left:0;right:0;background:red;color:white;padding:20px;font-size:16px;z-index:999999;text-align:center;font-weight:bold;';
-debugDiv.innerHTML = 'SCRIPT LOADED - Waiting for DOM...';
-
-// Add to page as soon as possible
-if (document.body) {
-    document.body.insertBefore(debugDiv, document.body.firstChild);
-} else {
-    document.addEventListener('DOMContentLoaded', function() {
-        document.body.insertBefore(debugDiv, document.body.firstChild);
-    });
-}
-
 (function() {
-    function updateDebug(msg) {
-        debugDiv.innerHTML += '<br>' + msg;
-    }
+    'use strict';
+
+    alert('FORM FOCUS FUNCTION STARTED');
 
     function initFormLabels() {
-        updateDebug('Init started');
-
         var containers = document.querySelectorAll('.labelToggle');
-        updateDebug('Found ' + containers.length + ' containers');
+        alert('Found ' + containers.length + ' labelToggle containers');
 
         if (containers.length === 0) {
-            updateDebug('ERROR: No labelToggle containers found!');
             return;
         }
 
         containers.forEach(function(container) {
             var input = container.querySelector('input, textarea, select');
-            if (!input) {
-                updateDebug('Container missing input');
-                return;
-            }
-
-            updateDebug('Setting up: ' + input.id);
+            if (!input) return;
 
             var handler = function(e) {
-                updateDebug('EVENT: ' + e.type);
                 container.classList.add('toggle-label');
-                container.style.border = '5px solid blue';
             };
 
             // Add all events
@@ -52,26 +30,18 @@ if (document.body) {
             input.addEventListener('click', handler);
         });
 
-        updateDebug('SETUP COMPLETE');
+        alert('Form labels setup complete');
     }
 
     // Try to initialize when DOM is ready
     if (document.readyState === 'loading') {
-        updateDebug('Waiting for DOMContentLoaded...');
-        document.addEventListener('DOMContentLoaded', function() {
-            updateDebug('DOMContentLoaded fired');
-            initFormLabels();
-        });
+        document.addEventListener('DOMContentLoaded', initFormLabels);
     } else {
-        updateDebug('DOM already ready');
         initFormLabels();
     }
 
     // Backup
-    setTimeout(function() {
-        updateDebug('Backup init at 1000ms');
-        initFormLabels();
-    }, 1000);
+    setTimeout(initFormLabels, 1000);
 })();
 // UTM Tracking
 var queryForm=function(e){var t=!(!e||!e.reset)&&e.reset,n=window.location.toString().split("?");if(n.length>1){var o=n[1].split("&");for(var s in o){var r=o[s].split("=");(t||null===sessionStorage.getItem(r[0]))&&sessionStorage.setItem(r[0],decodeURIComponent(r[1]))}}for(var i=document.querySelectorAll("input[type=hidden], input[type=text]"),j=0;j<i.length;j++){var a=sessionStorage.getItem(i[j].name);a&&(document.getElementsByName(i[j].name)[0].value=a)}};setTimeout(function(){queryForm()},3e3);
