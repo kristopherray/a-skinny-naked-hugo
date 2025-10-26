@@ -50,6 +50,11 @@ footer {
   transform: scale(1,1);
   border: 2px solid;
   text-align: center;
+  font-size:1.15rem;
+  line-height: 1em;
+  font-weight:700;
+  font-family:$btn-font;
+  padding:16px 24px;
 
   &:hover, &:focus {
     text-decoration:none;
@@ -61,6 +66,17 @@ footer {
     transform: scale(1.045,1.045);
   }
 
+  &.btn-primary {
+    background:$btn-color;
+    border-color:$btn-color;
+    color:#fff;
+  }
+
+  &.btn-outline-light {
+    background:transparent;
+    color:#fff;
+  }
+
 }
 
 form {
@@ -70,7 +86,7 @@ form {
     margin-left:-10px;
     margin-right:-10px;
     justify-content: center;
-  
+
     .col{
       position:relative;
       padding:$input-padding-top $input-padding-right $input-padding-bottom $input-padding-left;
@@ -78,8 +94,6 @@ form {
       label {
         position:absolute;
         font-size:18px;
-        line-height:$line-height-desktop;
-        left:8px + $input-padding-left;
         pointer-events: none;
         -webkit-transition: all .25s ease-in-out;
         -moz-transition: all .25s ease-in-out;
@@ -87,38 +101,13 @@ form {
         -o-transition: all .25s ease-in-out;
         transition: all .25s ease-in-out;
         font-weight:400;
-  
-        @media(max-width:767px){
-          line-height: $line-height-mobile;
-        }
-  
-      }
-  
-      &.toggle-label {
-        label {
-          position:absolute;
-          top:8px + $input-padding-top;
-          left:8px + $input-padding-left;
-          line-height:.75rem;
-          font-size:.75rem;
-          font-weight:700;
-          letter-spacing:.05rem;
-  
-          @media(max-width:767px){
-            top:5px + $input-padding-top;
-            left:5px + $input-padding-left;
-          }
-        }
       }
   
       input, textarea, select {
         border:none;
-        padding:1.25rem .75rem .25rem .7rem;
         font-size:1.25rem;
         color:$default;
         width:100%;
-        height:$line-height-desktop;
-        line-height:$line-height-desktop - 5px;
         -webkit-border-radius: $form-radius;
         -moz-border-radius: $form-radius;
         border-radius: $form-radius;
@@ -129,16 +118,6 @@ form {
         transition: all .35s;
         border: 2px solid;
   
-        //@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-        //  line-height:2.2rem;
-        //}
-  
-        @media(max-width:767px){
-          height: $line-height-mobile;
-          line-height: $line-height-mobile - 5px;
-          font-size:1.1rem;
-          padding:1.25rem .75rem .25rem .7rem;
-        }
   
         &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
           color: $light-grey;
@@ -220,13 +199,11 @@ form {
         margin-top:0;
         padding: 0;
         white-space: nowrap;
+      }
+
+      input, textarea, select, button, .btn  {
         height:$line-height-desktop;
         line-height:$line-height-desktop - 5px;
-  
-        @media(max-width:767px){
-          height: $line-height-mobile;
-          line-height: $line-height-mobile - 5px;
-        }
       }
   
   
@@ -245,6 +222,12 @@ form {
       input[type=checkbox]:checked + label:before { letter-spacing: 10px; } /* allow space for check mark */
   
     }
+
+    .form-floating>.form-control, .form-floating>.form-control-plaintext {
+      height:$line-height-desktop;
+      line-height:$line-height-desktop - 5px;
+    }
+
   
     .checkbox {
       text-align: left;
@@ -318,13 +301,13 @@ form {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80px;
+    height: 100px;
     padding: 0 1rem;
     min-width: 200px;
 
     img {
-        max-height: 80px;
-        max-width: 200px;
+        max-height: 100px;
+        max-width: 250px;
         width: auto;
         height: auto;
         object-fit: contain;
@@ -356,12 +339,12 @@ form {
     }
 
     .logo-item {
-        height: 60px;
+        height: 80px;
         min-width: 150px;
 
         img {
-            max-height: 60px;
-            max-width: 150px;
+            max-height: 80px;
+            max-width: 200px;
         }
     }
 }

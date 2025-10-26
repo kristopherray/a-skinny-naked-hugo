@@ -1,6 +1,6 @@
 [build]
   publish = "public"
-  command = "hugo --gc --minify"
+  command = "hugo --gc --minify && cp robots.production.txt public/robots.txt"
 
 [build.environment]
   HUGO_VERSION = "0.152.2"
@@ -11,10 +11,23 @@
   HUGO_ENV = "production"
 
 [context.deploy-preview]
-  command = "hugo --gc --minify --buildFuture -b $DEPLOY_PRIME_URL"
+  command = "hugo --gc --buildFuture && cp robots.staging.txt public/robots.txt"
+
+[context.deploy-preview.environment]
+  HUGO_VERSION = "0.141.0"
+  HUGO_BUILD_DRAFTS = "true"
+  HUGO_BUILD_EXPIRED = "false"
 
 [context.branch-deploy]
-  command = "hugo --gc --minify -b $DEPLOY_PRIME_URL"
+  command = "hugo --gc --buildFuture && cp robots.staging.txt public/robots.txt"
+
+[context.branch-deploy.environment]
+  HUGO_VERSION = "0.141.0"
+  HUGO_BUILD_DRAFTS = "true"
+  HUGO_BUILD_EXPIRED = "false"
+
+[context.next.environment]
+  HUGO_ENABLEGITINFO = "true"
 
 [[headers]]
   for = "/*"

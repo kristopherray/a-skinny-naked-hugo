@@ -5,119 +5,137 @@
     <input type="hidden" name="utm_campaign" value="">
 
         <!-- Full Name -->
-        <div class="col col-12 labelToggle">
-            <label for="full_name" class="form-label">Full Name*</label>
-            <input type="text" id="full_name" class="form-control" name="full_name" placeholder="ex. John or Jane Doe" required>
+        <div class="col col-12">
+            <div class="form-floating">
+                <input type="text" id="full_name" class="form-control" name="full_name" placeholder="Full Name*" required>
+                <label for="full_name">Full Name*</label>
+            </div>
         </div>
 
         <!-- First Name -->
-        <div class="col col-12 col-sm-6 labelToggle">
-            <label for="first_name" class="form-label">First Name*</label>
-            <input type="text" id="first_name" class="form-control" name="first_name" placeholder="ex. John or Jane" required>
+        <div class="col col-12 col-sm-6">
+            <div class="form-floating">
+                <input type="text" id="first_name" class="form-control" name="first_name" placeholder="First Name*" required>
+                <label for="first_name">First Name*</label>
+            </div>
         </div>
 
         <!-- Last Name -->
-        <div class="col col-12 col-sm-6 labelToggle">
-            <label for="last_name" class="form-label">Last Name*</label>
-            <input type="text" id="last_name" class="form-control" name="last_name" placeholder="ex. Doe" required>
+        <div class="col col-12 col-sm-6">
+            <div class="form-floating">
+                <input type="text" id="last_name" class="form-control" name="last_name" placeholder="Last Name*" required>
+                <label for="last_name">Last Name*</label>
+            </div>
         </div>
 
         <!-- Email Address -->
-        <div class="col col-12 col-sm-6 labelToggle">
-            <label for="email" class="form-label">Email Address*</label>
-            <input type="email" id="email" class="form-control" name="email" placeholder="ex. yourname@email.com" required>
+        <div class="col col-12 col-sm-6">
+            <div class="form-floating">
+                <input type="email" id="email" class="form-control" name="email" placeholder="Email Address*" required>
+                <label for="email">Email Address*</label>
+            </div>
         </div>
 
         <!-- Phone Number -->
-        <div class="col col-12 col-sm-6 labelToggle">
-            <label for="phone" class="form-label">Phone Number*</label>
-            <input type="tel" id="phone" class="phone form-control" name="phone" placeholder="(123) 456-7890" required>
+        <div class="col col-12 col-sm-6">
+            <div class="form-floating">
+                <input type="tel" id="phone" class="phone form-control" name="phone" placeholder="Phone Number*" required>
+                <label for="phone">Phone Number*</label>
+            </div>
         </div>
 
         <!-- City -->
-        <div class="col col-12 col-sm-5 labelToggle">
-            <label for="city" class="form-label">City*</label>
-            <input type="text" id="city" class="form-control" name="city" placeholder="ex. Austin" required>
+        <div class="col col-12 col-sm-5">
+            <div class="form-floating">
+                <input type="text" id="city" class="form-control" name="city" placeholder="City*" required>
+                <label for="city">City*</label>
+            </div>
         </div>
 
         <!-- State -->
-        <div class="col col-12 col-sm-4 labelToggle">
-            <label for="state" class="form-label">State*</label>
-            <select name="state" id="state" class="form-select" required>
-            <option value=""></option>
-            <option value="AL">AL</option>
-            <option value="AK">AK</option>
-            <option value="AR">AR</option>
-            <option value="AZ">AZ</option>
-            <option value="CA">CA</option>
-            <option value="CO">CO</option>
-            <option value="CT">CT</option>
-            <option value="DC">DC</option>
-            <option value="DE">DE</option>
-            <option value="FL">FL</option>
-            <option value="GA">GA</option>
-            <option value="HI">HI</option>
-            <option value="IA">IA</option>
-            <option value="ID">ID</option>
-            <option value="IL">IL</option>
-            <option value="IN">IN</option>
-            <option value="KS">KS</option>
-            <option value="KY">KY</option>
-            <option value="LA">LA</option>
-            <option value="MA">MA</option>
-            <option value="MD">MD</option>
-            <option value="ME">ME</option>
-            <option value="MI">MI</option>
-            <option value="MN">MN</option>
-            <option value="MO">MO</option>
-            <option value="MS">MS</option>
-            <option value="MT">MT</option>
-            <option value="NC">NC</option>
-            <option value="NE">NE</option>
-            <option value="NH">NH</option>
-            <option value="NJ">NJ</option>
-            <option value="NM">NM</option>
-            <option value="NV">NV</option>
-            <option value="NY">NY</option>
-            <option value="ND">ND</option>
-            <option value="OH">OH</option>
-            <option value="OK">OK</option>
-            <option value="OR">OR</option>
-            <option value="PA">PA</option>
-            <option value="RI">RI</option>
-            <option value="SC">SC</option>
-            <option value="SD">SD</option>
-            <option value="TN">TN</option>
-            <option value="TX">TX</option>
-            <option value="UT">UT</option>
-            <option value="VT">VT</option>
-            <option value="VA">VA</option>
-            <option value="WA">WA</option>
-            <option value="WI">WI</option>
-            <option value="WV">WV</option>
-            <option value="WY">WY</option>
-            <option value="AS">AS</option>
-            <option value="GU">GU</option>
-            <option value="MP">MP</option>
-            <option value="PR">PR</option>
-            <option value="UM">UM</option>
-            <option value="VI">VI</option>
-            <option value="AA">AA</option>
-            <option value="AP">AP</option>
-            <option value="AE">AE</option>
-        </select>
+        <div class="col col-12 col-sm-4">
+            <div class="form-floating">
+                <select name="state" id="state" class="form-select" aria-label="State*" required>
+                    <option value="" disabled selected></option>
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AR">AR</option>
+                    <option value="AZ">AZ</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DC">DC</option>
+                    <option value="DE">DE</option>
+                    <option value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="IA">IA</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="MA">MA</option>
+                    <option value="MD">MD</option>
+                    <option value="ME">ME</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MO">MO</option>
+                    <option value="MS">MS</option>
+                    <option value="MT">MT</option>
+                    <option value="NC">NC</option>
+                    <option value="NE">NE</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NV">NV</option>
+                    <option value="NY">NY</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WI">WI</option>
+                    <option value="WV">WV</option>
+                    <option value="WY">WY</option>
+                    <option value="AS">AS</option>
+                    <option value="GU">GU</option>
+                    <option value="MP">MP</option>
+                    <option value="PR">PR</option>
+                    <option value="UM">UM</option>
+                    <option value="VI">VI</option>
+                    <option value="AA">AA</option>
+                    <option value="AP">AP</option>
+                    <option value="AE">AE</option>
+                </select>
+                <label for="state">State*</label>
+            </div>
         </div>
 
         <!-- Zip Code -->
-        <div class="col col-12 col-sm-3 labelToggle">
-            <label for="zip" class="form-label">Zip Code*</label>
-            <input type="text" id="zip" class="form-control" name="zipcode" placeholder="12345" required>
+        <div class="col col-12 col-sm-3">
+            <div class="form-floating">
+                <input type="text" id="zip" class="form-control" name="zipcode" placeholder="Zip Code*" required>
+                <label for="zip">Zip Code*</label>
+            </div>
         </div>
 
         <!-- Message -->
-        <div class="col col-12 labelToggle">
-            <label for="message" class="form-label">Inquire...</label>
-            <textarea name="message" id="message" class="form-control" rows="5" placeholder="What can I help you with?"></textarea>
+        <div class="col col-12">
+            <div class="form-floating">
+                <textarea name="message" id="message" class="form-control" placeholder="What can I help you with?" style="height: 100px"></textarea>
+                <label for="message">Inquire...</label>
+            </div>
         </div>
 
         <!-- Checkboxes Section -->

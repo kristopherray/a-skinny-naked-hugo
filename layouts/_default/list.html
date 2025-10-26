@@ -35,7 +35,7 @@
                                 <small>{{ .Date.Format "January 2, 2006" }}</small>
                             </p>
                             {{ with .Summary }}
-                            <p class="card-text">{{ . }}</p>
+                            <p class="card-text">{{ . | plainify | truncate 100 }}</p>
                             {{ end }}
                             <a href="{{ .Permalink }}" class="btn btn-sm btn-outline-primary mt-auto">Read More</a>
                         </div>
