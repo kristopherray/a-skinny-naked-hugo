@@ -59,6 +59,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="https://use.typekit.net/fej5sdm.css">
+
     <!-- Custom Styles (includes Bootstrap custom build) -->
     {{ $sass := resources.Get "sass/style.scss" | toCSS | minify }}
     <link rel="stylesheet" href="{{ $sass.RelPermalink }}">
@@ -68,7 +70,7 @@
 
     {{ block "head" . }}{{ end }}
 </head>
-<body {{ if .Params.id }}id="{{ .Params.id }}"{{ end }}>
+<body {{ if .Params.id }}id="{{ .Params.id }}"{{ end }} {{ block "body" . }}{{ end }}>
 
     {{ block "header" . }}{{ end }}
 

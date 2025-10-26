@@ -61,39 +61,14 @@
   </div>
 </div>
 
-{{ partial "logo-carousel.html" . }}
-
 {{ partial "signup.html" .}}
+
+{{ partial "logo-carousel.html" . }}
 
 {{ partial "page-sections.html" .}}
 
-<div class="container mt-5">
-    <!-- Recent Posts -->
-    {{ $posts := where .Site.RegularPages "Type" "posts" }}
-    {{ if $posts }}
-    <div class="row">
-        <div class="col-12 mb-4">
-            <h2>Recent Posts</h2>
-        </div>
-        {{ range first 2 $posts }}
-        <div class="col-12 col-md-6 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h3 class="card-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-                    <p class="card-text text-muted">
-                        <small>{{ .Date.Format "January 2, 2006" }}</small>
-                    </p>
-                    {{ if .Summary }}
-                    <p class="card-text">{{ .Summary | plainify | truncate 100 }}</p>
-                    {{ end }}
-                    <a href="{{ .Permalink }}" class="btn btn-sm btn-outline-primary">Read More</a>
-                </div>
-            </div>
-        </div>
-        {{ end }}
-    </div>
-    {{ end }}
-</div>
+{{ partial "recent-posts.html" .}}
+
 {{ end }}
 
 {{ define "footer" }}

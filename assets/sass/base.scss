@@ -7,6 +7,10 @@ html, body {
     font-family:$body-font;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family:$header-font;
+}
+
 section {
     padding: 100px 0;
     position: relative;
@@ -28,7 +32,7 @@ body.modal-open {
 }
 
 footer {
-    padding-bottom:100px;
+    padding:20px 0 100px 0;
 }
 
 /* Base Styles */
@@ -80,175 +84,186 @@ footer {
 }
 
 form {
-    @extend .row;
-    font-size:$base-fontsize;
-    flex-wrap: wrap;
-    margin-left:-10px;
-    margin-right:-10px;
-    justify-content: center;
+  @extend .row;
+  font-size:$base-fontsize;
+  flex-wrap: wrap;
+  margin-left:-10px;
+  margin-right:-10px;
+  justify-content: center;
 
-    .col{
-      position:relative;
-      padding:$input-padding-top $input-padding-right $input-padding-bottom $input-padding-left;
-  
-      label {
-        position:absolute;
-        font-size:18px;
-        pointer-events: none;
-        -webkit-transition: all .25s ease-in-out;
-        -moz-transition: all .25s ease-in-out;
-        -ms-transition: all .25s ease-in-out;
-        -o-transition: all .25s ease-in-out;
-        transition: all .25s ease-in-out;
-        font-weight:400;
-      }
-  
-      input, textarea, select {
-        border:none;
-        font-size:1.25rem;
-        color:$default;
-        width:100%;
-        -webkit-border-radius: $form-radius;
-        -moz-border-radius: $form-radius;
-        border-radius: $form-radius;
-        -webkit-transition: all .35s;
-        -moz-transition: all .35s;
-        -ms-transition: all .35s;
-        -o-transition: all .35s;
-        transition: all .35s;
-        border: 2px solid;
-  
-  
-        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-          color: $light-grey;
-          -webkit-transition: all .25s;
-          -moz-transition: all .25s;
-          -ms-transition: all .25s;
-          -o-transition: all .25s;
-          transition: all .25s;
-          opacity:0;
-        }
-        &::-moz-placeholder { /* Firefox 19+ */
-          color: $light-grey;
-          -webkit-transition: all .25s;
-          -moz-transition: all .25s;
-          -ms-transition: all .25s;
-          -o-transition: all .25s;
-          transition: all .25s;
-          opacity:0;
-        }
-        &:-ms-input-placeholder { /* IE 10+ */
-          color: $light-grey;
-          -webkit-transition: all .25s;
-          -moz-transition: all .25s;
-          -ms-transition: all .25s;
-          -o-transition: all .25s;
-          transition: all .25s;
-          opacity:0;
-        }
-        &:-moz-placeholder { /* Firefox 18- */
-          color: $light-grey;
-          -webkit-transition: all .25s;
-          -moz-transition: all .25s;
-          -ms-transition: all .25s;
-          -o-transition: all .25s;
-          transition: all .25s;
-          opacity:0;
-        }
-  
-        &:focus {
-          outline:none;
-          border:2px solid $btn-color;
-  
-          &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-            opacity:1;
-          }
-          &::-moz-placeholder { /* Firefox 19+ */
-            opacity:1;
-          }
-          &:-ms-input-placeholder { /* IE 10+ */
-            opacity:1;
-          }
-          &:-moz-placeholder { /* Firefox 18- */
-            opacity:1;
-          }
-        }
-  
-        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-          &:-ms-input-placeholder { /* IE 10+ */
-            color: $light-grey;
-            opacity: 1;
-          }
-        }
-  
-      }
-  
-      textarea {
-        width:100%;
-        max-width:100%;
-        min-width:100%;
-        overflow: hidden;
-        height:200px;
-        min-height:200px;
-        line-height:1em;
-        padding-top:25px;
-      }
-  
-      button, .btn {
-        width:100%;
-        margin-top:0;
-        padding: 0;
-        white-space: nowrap;
-      }
+  .col{
+    position:relative;
+    padding:$input-padding-top $input-padding-right $input-padding-bottom $input-padding-left;
 
-      input, textarea, select, button, .btn  {
-        height:$line-height-desktop;
-        line-height:$line-height-desktop - 5px;
-      }
-  
-  
-      input[type=checkbox] { display:none; } /* to hide the checkbox itself */
-  
-      input[type=checkbox] + label:before {
-        font-family: "Font Awesome 6 Pro";
-        display: inline-block;
-      }
-  
-      input[type=checkbox] + label:before { content: "\f111"; font-style: normal !important; } /* unchecked icon */
-      input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
-  
-      input[type=checkbox]:checked + label:before { content: "\f058"; font-style: normal !important;
-        color: lighten($btn-color,10%); } /* checked icon */
-      input[type=checkbox]:checked + label:before { letter-spacing: 10px; } /* allow space for check mark */
-  
+    label {
+      position:absolute;
+      font-size:18px;
+      pointer-events: none;
+      -webkit-transition: all .25s ease-in-out;
+      -moz-transition: all .25s ease-in-out;
+      -ms-transition: all .25s ease-in-out;
+      -o-transition: all .25s ease-in-out;
+      transition: all .25s ease-in-out;
+      font-weight:400;
     }
 
-    .form-floating>.form-control, .form-floating>.form-control-plaintext {
+    input, textarea, select {
+      border:none;
+      font-size:1.25rem;
+      color:$default;
+      width:100%;
+      -webkit-border-radius: $form-radius;
+      -moz-border-radius: $form-radius;
+      border-radius: $form-radius;
+      -webkit-transition: all .35s;
+      -moz-transition: all .35s;
+      -ms-transition: all .35s;
+      -o-transition: all .35s;
+      transition: all .35s;
+      border: 2px solid;
+      
+
+
+      &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: $light-grey;
+        -webkit-transition: all .25s;
+        -moz-transition: all .25s;
+        -ms-transition: all .25s;
+        -o-transition: all .25s;
+        transition: all .25s;
+        opacity:0;
+      }
+      &::-moz-placeholder { /* Firefox 19+ */
+        color: $light-grey;
+        -webkit-transition: all .25s;
+        -moz-transition: all .25s;
+        -ms-transition: all .25s;
+        -o-transition: all .25s;
+        transition: all .25s;
+        opacity:0;
+      }
+      &:-ms-input-placeholder { /* IE 10+ */
+        color: $light-grey;
+        -webkit-transition: all .25s;
+        -moz-transition: all .25s;
+        -ms-transition: all .25s;
+        -o-transition: all .25s;
+        transition: all .25s;
+        opacity:0;
+      }
+      &:-moz-placeholder { /* Firefox 18- */
+        color: $light-grey;
+        -webkit-transition: all .25s;
+        -moz-transition: all .25s;
+        -ms-transition: all .25s;
+        -o-transition: all .25s;
+        transition: all .25s;
+        opacity:0;
+      }
+
+      &:focus {
+        outline:none;
+        border:2px solid $btn-color;
+
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          opacity:1;
+        }
+        &::-moz-placeholder { /* Firefox 19+ */
+          opacity:1;
+        }
+        &:-ms-input-placeholder { /* IE 10+ */
+          opacity:1;
+        }
+        &:-moz-placeholder { /* Firefox 18- */
+          opacity:1;
+        }
+      }
+
+      @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        &:-ms-input-placeholder { /* IE 10+ */
+          color: $light-grey;
+          opacity: 1;
+        }
+      }
+
+    }
+
+    textarea {
+      width:100%;
+      max-width:100%;
+      min-width:100%;
+      overflow: hidden;
+      height:200px;
+      min-height:200px;
+      line-height:1em;
+      padding-top:25px;
+    }
+
+    button, .btn {
+      width:100%;
+      margin-top:0;
+      padding: 0;
+      white-space: nowrap;
+    }
+
+    input, textarea, select, button, .btn  {
       height:$line-height-desktop;
+      min-height: $line-height-desktop;
       line-height:$line-height-desktop - 5px;
     }
 
-  
-    .checkbox {
-      text-align: left;
-      label {
-        position:relative;
-        font-size:20px;
-        pointer-events: all;
-        cursor: pointer;
-        left:0;
-  
-        @media(max-width:991px){
-          font-size:2em;
-        }
-  
-        @media(max-width:575px){
-          font-size:1.25em;
-        }
+
+    input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+
+    input[type=checkbox] + label:before {
+      font-family: "Font Awesome 6 Pro";
+      display: inline-block;
+    }
+
+    input[type=checkbox] + label:before { content: "\f111"; font-style: normal !important; } /* unchecked icon */
+    input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+    input[type=checkbox]:checked + label:before { content: "\f058"; font-style: normal !important;
+      color: lighten($btn-color,10%); } /* checked icon */
+    input[type=checkbox]:checked + label:before { letter-spacing: 10px; } /* allow space for check mark */
+
+  }
+
+  .form-floating>.form-control, .form-floating>.form-control-plaintext {
+    height:$line-height-desktop;
+    min-height: $line-height-desktop;
+    line-height:$line-height-desktop - 5px;
+  }
+
+
+  .checkbox {
+    text-align: left;
+    label {
+      position:relative;
+      font-size:20px;
+      pointer-events: all;
+      cursor: pointer;
+      left:0;
+
+      @media(max-width:991px){
+        font-size:2em;
+      }
+
+      @media(max-width:575px){
+        font-size:1.25em;
       }
     }
-  
   }
+
+}
+
+.single-default {
+  main {
+    img {
+      max-width:100%;
+    }
+  }
+}
 
 // Logo Carousel Infinite Scroll
 .logo-carousel-wrapper {
