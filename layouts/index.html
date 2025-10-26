@@ -1,5 +1,9 @@
+{{ define "header" }}
+{{ partial "header.html" . }}
+{{ end }}
+
 {{ define "main" }}
-<section id="banner">
+<section id="banner" {{if .Params.banner_video}}class="bg-video"{{end}}>
 
     {{if .Params.banner_image}}
     <div class="banner-image bg-image"><img src="{{.Params.banner_image}}" alt="{{ .Site.Params.Title }} {{ .Title }} Banner Background Image" /></div>
@@ -137,4 +141,8 @@
     </div>
     {{ end }}
 </div>
+{{ end }}
+
+{{ define "footer" }}
+{{ partial "footer.html" . }}
 {{ end }}

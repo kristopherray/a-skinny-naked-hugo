@@ -1,7 +1,9 @@
 # A Skinny Naked Hugo (Work In Progress with Claude!)
 *built with [Hugo](https://gohugo.io)* by - [KristopherRay.com](https://kristopherray.com)  
 
-This "template" is cooked up as lightweight as possible with the latest Hugo and Bootstrap frameworks, just the way I like it.
+Start by deleting the contents of `/assets/sass/custom.scss` and if needed, delete `/posts` and `/logos/`
+
+This "template" is cooked up as lightweight as possible with the latest Hugo and Bootstrap frameworks, just the way I like it, with my latest development philosophy of being as lean as possible.
 
 *Packaged with:*
 - [All the original <3 Bootstrap](https://getbootstrap.com/) [5.3.8] *customized and minified*

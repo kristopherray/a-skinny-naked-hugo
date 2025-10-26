@@ -9,10 +9,6 @@
         }
     }
 
-
-
-
-
     function handleEvent(e) {
         toggleLabelClass(e.target);
     }

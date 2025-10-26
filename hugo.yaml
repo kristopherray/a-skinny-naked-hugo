@@ -43,3 +43,15 @@ markup:
       hardWraps: false
       unsafe: true
       xhtml: false
+
+menu:
+  main:
+    - name: Home
+      url: /
+      weight: -20
+    - name: News
+      url: /news/
+      weight: -10
+    - name: Contact
+      url: /contact/
+      weight: -5

@@ -4,7 +4,7 @@ weight: 2
 id: section-1
 position: justify-content-end align-content-center
 size: col-12 col-md-6
-image: https://picsum.photos/700
+image: /img/banner.png
 section_categories:
     - Home
 ---

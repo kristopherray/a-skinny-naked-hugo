@@ -3,7 +3,7 @@
 {{ range $k, $v := $mgatag }}
     {{ if eq $k $myVar }}
         {{ range $v.Pages }}
-            <section id="{{ .Params.id }}">
+            <section id="{{ .Params.id }}" {{if .Params.bg_video}}class="bg-video"{{end}}>
 
                 {{ if .Params.custom_section }}
                 {{.Content}}
@@ -15,8 +15,8 @@
                     </div>
                     {{end}}
 
-                    {{ if .Params.vimeobg }}
-                    <div class="video-wrapper bg-image"><iframe src="https://player.vimeo.com/video/{{.Params.vimeobg}}?background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><script src="https://player.vimeo.com/api/player.js"></script></div>
+                    {{ if .Params.bg_video }}
+                    <div class="video-wrapper bg-image"><iframe src="https://player.vimeo.com/video/{{.Params.bg_video}}?background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><script src="https://player.vimeo.com/api/player.js"></script></div>
                     {{end}}
 
                     <div class="container">

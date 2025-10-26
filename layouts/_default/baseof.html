@@ -69,35 +69,14 @@
     {{ block "head" . }}{{ end }}
 </head>
 <body {{ if .Params.id }}id="{{ .Params.id }}"{{ end }}>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
-            <ul class="socials">{{ partial "socials.html" . }}</ul>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ "/" | relURL }}">Home</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Main Content -->
+    {{ block "header" . }}{{ end }}
+
     <main>
         {{ block "main" . }}{{ end }}
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container text-center">
-            <p class="mb-0">&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
-        </div>
-    </footer>
+    {{ block "footer" . }}{{ end }}
 
     {{/*  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>  */}}
     <!-- Bootstrap JS Bundle (includes Popper) - Local -->
