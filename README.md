@@ -1,5 +1,5 @@
-# A Skinny Naked Hugo (Work In Progress with Claude!)
-*built with [Hugo](https://gohugo.io)* by - [KristopherRay.com](https://kristopherray.com)  
+# A Skinny Naked Hugo
+*built with [Hugo](https://gohugo.io)* by - [KristopherRay.com](https://kristopherray.com) + [Claude Code](https://claude.ai/) 
 
 Start by deleting the contents of `/assets/sass/custom.scss` and if needed, delete `/posts` and `/logos/`
 

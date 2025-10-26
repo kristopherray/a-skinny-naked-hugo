@@ -1,3 +1,9 @@
+{{ define "head" }}
+<!-- Custom Styles (includes Bootstrap custom build) -->
+{{ $sasshome := resources.Get "sass/home.scss" | toCSS | minify }}
+<link rel="stylesheet" href="{{ $sasshome.RelPermalink }}">
+{{ end }}
+
 {{ define "header" }}
 {{ partial "header.html" . }}
 {{ end }}

@@ -1,0 +1,34 @@
+#home {
+    #banner {
+        z-index: 1;
+        color:#fff;
+        height:calc(100vh - 350px);
+        min-height:500px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-direction:column;
+        text-align:center;
+        background: #000;
+        position:relative;
+        z-index:1;
+
+        h1 {
+            font-size: 80px;
+        }
+
+        .video-wrapper {
+            &:before {
+              content: '';
+              width:100%;
+              height:100%;
+              position:absolute;
+              top:0;
+              left:0;
+              background: linear-gradient(180deg, rgba(0, 0, 0, 0.40) 0%, #000 100%);
+              display:block;
+              z-index: 1;
+            }
+        }
+    }
+}
