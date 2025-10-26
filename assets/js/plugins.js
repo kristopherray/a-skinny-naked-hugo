@@ -1,62 +1,79 @@
-// Form Focus - Mobile & Desktop Compatible with Debug
+// Form Focus - Mobile & Desktop Compatible
 (function() {
     'use strict';
 
-    var DEBUG = true; // Set to false to disable console logs
+    var DEBUG = true; // Set to false to disable visual debugging
 
-    function log(message, data) {
-        if (DEBUG) {
-            console.log('[Form Labels] ' + message, data || '');
+    // Create visual debug console on page
+    var debugConsole;
+    function createDebugConsole() {
+        if (!DEBUG) return;
+        debugConsole = document.createElement('div');
+        debugConsole.id = 'debug-console';
+        debugConsole.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#000;color:#0f0;padding:10px;font-size:10px;max-height:150px;overflow-y:auto;z-index:99999;font-family:monospace;';
+        document.body.appendChild(debugConsole);
+    }
+
+    function log(message) {
+        console.log('[Form Labels] ' + message);
+        if (DEBUG && debugConsole) {
+            var time = new Date().toLocaleTimeString();
+            debugConsole.innerHTML = time + ': ' + message + '<br>' + debugConsole.innerHTML;
         }
     }
 
     function initFormLabels() {
-        log('Initializing form labels...');
-
-        var formElements = document.querySelectorAll('.labelToggle input, .labelToggle textarea, .labelToggle select');
-        log('Found elements:', formElements.length);
-
-        if (formElements.length === 0) {
-            log('No elements found, retrying in 100ms');
-            setTimeout(initFormLabels, 100);
-            return;
+        // Create debug console first
+        if (DEBUG && !debugConsole) {
+            createDebugConsole();
         }
 
-        formElements.forEach(function(element, index) {
-            log('Setting up element ' + index, element.tagName + '#' + element.id);
+        log('Script started');
 
-            // Function to toggle label
-            function handleLabelToggle(event) {
-                log('Event fired: ' + event.type + ' on ' + element.id);
-                var parent = element.closest('.labelToggle');
-                if (parent) {
-                    parent.classList.add('toggle-label');
-                    log('Added toggle-label class to parent of ' + element.id);
-                } else {
-                    log('ERROR: No parent found for ' + element.id);
-                }
+        var containers = document.querySelectorAll('.labelToggle');
+        log('Found ' + containers.length + ' labelToggle containers');
+
+        containers.forEach(function(container, idx) {
+            var input = container.querySelector('input, textarea, select');
+            if (!input) {
+                log('Container ' + idx + ' has no input');
+                return;
             }
 
-            // Add all event listeners with passive: false for mobile
-            var events = ['focus', 'input', 'change', 'keyup', 'blur', 'touchstart', 'click'];
-            events.forEach(function(eventType) {
-                element.addEventListener(eventType, handleLabelToggle, { passive: true });
-            });
+            log('Setup: ' + input.id);
 
-            log('Event listeners added to ' + element.id);
+            // Single handler function
+            var handler = function(e) {
+                log('Event: ' + e.type + ' on ' + input.id);
+                container.classList.add('toggle-label');
+                // Visual feedback for debugging
+                if (DEBUG) {
+                    container.style.borderLeft = '3px solid red';
+                }
+            };
+
+            // Multiple event types for maximum compatibility
+            input.addEventListener('touchstart', handler, false);
+            input.addEventListener('touchend', handler, false);
+            input.addEventListener('click', handler, false);
+            input.addEventListener('focus', handler, false);
+            input.addEventListener('input', handler, false);
+            input.addEventListener('change', handler, false);
+            input.addEventListener('keydown', handler, false);
         });
 
-        log('Form labels initialization complete');
+        log('Setup complete');
     }
 
-    // Initialize when DOM is ready
+    // Multiple initialization attempts for reliability
     if (document.readyState === 'loading') {
-        log('DOM still loading, waiting...');
         document.addEventListener('DOMContentLoaded', initFormLabels);
     } else {
-        log('DOM already loaded, initializing immediately');
         initFormLabels();
     }
+
+    // Backup initialization
+    setTimeout(initFormLabels, 500);
 })();
 // UTM Tracking
 var queryForm=function(e){var t=!(!e||!e.reset)&&e.reset,n=window.location.toString().split("?");if(n.length>1){var o=n[1].split("&");for(s in o){var r=o[s].split("=");(t||null===sessionStorage.getItem(r[0]))&&sessionStorage.setItem(r[0],decodeURIComponent(r[1]))}}for(var i=document.querySelectorAll("input[type=hidden], input[type=text]"),s=0;s<i.length;s++){var a=sessionStorage.getItem(i[s].name);a&&(document.getElementsByName(i[s].name)[0].value=a)}};setTimeout(function(){queryForm()},3e3);
