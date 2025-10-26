@@ -33,18 +33,11 @@ footer {
 
 /* Base Styles */
 
-.button {
-  background:$btn-color;
-  color:#fff;
-  font-weight:700;
-  font-family:$btn-font;
-  padding:16px 24px;
+.btn {
   display: inline-block;
   -webkit-border-radius: $btn-radius;
   -moz-border-radius:$btn-radius;
   border-radius: $btn-radius;
-  font-size:1.15rem;
-  line-height: 1em;
   -webkit-transition: all $transition;
   -moz-transition: all $transition;
   -ms-transition: all $transition;
@@ -55,45 +48,17 @@ footer {
   -ms-transform: scale(1,1);
   -o-transform: scale(1,1);
   transform: scale(1,1);
-  border: 2px solid $btn-color;
+  border: 2px solid;
   text-align: center;
 
   &:hover, &:focus {
     text-decoration:none;
     outline: none;
-    color:#fff;
     -webkit-transform: scale(1.045,1.045);
     -moz-transform: scale(1.045,1.045);
     -ms-transform: scale(1.045,1.045);
     -o-transform: scale(1.045,1.045);
     transform: scale(1.045,1.045);
-  }
-
-  &.button-outline {
-    background:transparent;
-    color:$btn-color;
-  }
-
-  &.button-outline-white {
-    background: transparent;
-    color:#fff;
-    border-color:#fff;
-  }
-
-  &.inactive {
-    opacity: .5;
-    cursor: default;
-
-    &:hover, &:focus {
-      text-decoration:none;
-      outline: none;
-      color:#fff;
-      -webkit-transform: scale(1,1);
-      -moz-transform: scale(1,1);
-      -ms-transform: scale(1,1);
-      -o-transform: scale(1,1);
-      transform: scale(1,1);
-    }
   }
 
 }
@@ -250,7 +215,7 @@ form {
         padding-top:25px;
       }
   
-      button, .button {
+      button, .btn {
         width:100%;
         margin-top:0;
         padding: 0;

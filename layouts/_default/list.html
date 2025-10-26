@@ -1,4 +1,6 @@
-{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+{{ define "header" }}
+{{ partial "header.html" . }}
+{{ end }}
 
 {{ define "main" }}
 <div class="container mt-5">
@@ -78,4 +80,8 @@
         </div>
     </div>
 </div>
+{{ end }}
+
+{{ define "footer" }}
+{{ partial "footer.html" . }}
 {{ end }}

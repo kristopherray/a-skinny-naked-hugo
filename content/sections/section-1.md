@@ -13,4 +13,4 @@ section_categories:
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vel ornare est, non cursus tortor. Pellentesque nisi tellus, hendrerit nec aliquam vel, euismod vel libero. Cras iaculis neque interdum finibus sodales. Ut semper mattis eleifend. Mauris eleifend ligula in metus suscipit consectetur. Sed rutrum ipsum et ultrices consequat. 
 
-<a href="#" class="btn btn-primary">Lightbox &rsaquo;</a>
+<a href="#" class="btn btn-primary">Read More &rsaquo;</a>

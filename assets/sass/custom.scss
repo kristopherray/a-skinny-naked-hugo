@@ -1,3 +1,25 @@
+.btn {
+  font-size:1.15rem;
+  line-height: 1em;
+
+  &.btn-primary {
+    background:$btn-color;
+    color:#fff;
+    font-weight:700;
+    font-family:$btn-font;
+    padding:16px 24px;
+  }
+
+  &.btn-outline-light {
+    background:transparent;
+    color:#fff;
+    font-weight:700;
+    font-family:$btn-font;
+    padding:16px 24px;
+  }
+}
+
+
 #home {
     #banner {
         z-index: 1;
