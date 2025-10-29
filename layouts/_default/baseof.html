@@ -47,11 +47,11 @@
 
     <!-- SiteBaseURL + Small Image (<1mb) Required for Twitter Card to Work -->
     {{ if .Params.og_img }}
-        <meta property="og:image" content="{{ .Site.BaseURL }}{{ .Params.og_img }}"/>
-        <meta name="twitter:image" content="{{ .Site.BaseURL }}{{ .Params.og_img }}"/>
+        <meta property="og:image" content="{{ .Params.og_img | absURL }}"/>
+        <meta name="twitter:image" content="{{ .Params.og_img | absURL }}"/>
     {{ else }}
-        <meta property="og:image" content="{{ .Site.BaseURL }}/img/og-img.png"/>
-        <meta name="twitter:image" content="{{ .Site.BaseURL }}/img/og-img.png"/>
+        <meta property="og:image" content="{{ "img/og-img.png" | absURL }}"/>
+        <meta name="twitter:image" content="{{ "img/og-img.png" | absURL }}"/>
     {{ end }}
 
     <meta property="og:image:width" content="1200"/>
