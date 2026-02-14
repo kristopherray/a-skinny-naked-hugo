@@ -45,6 +45,15 @@ markup:
       unsafe: true
       xhtml: false
 
+module:
+  mounts:
+    - source: assets
+      target: assets
+    - source: static
+      target: static
+    - source: static/img
+      target: assets/img
+
 menu:
   main:
     - name: Home

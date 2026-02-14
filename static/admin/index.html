@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Manager</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <style>
+        /* Some Light Styling */
+        a, li a, li a span {color:#666 !important;}
+        a:hover, li a:hover, li a span:hover, li a:hover span {color:#000 !important;}
+        .sidebar-active {background-color:#f3f3f3 !important;}
+        main li a, main li a { border:2px solid #fff !important;}
+        main li a:hover, main li a:focus { border:2px solid #000 !important;}
+        main div:nth-child(1){display:none !important;}
+        body {background-color:#f3f3f3 !important;}
+        .Pane2 {display: none !important;}
+        .Pane1 {width:100% !important;}
+        .css-1bqupl5-ViewControls {display:none !important;}
+    </style>
+
+</head>
+<body>
+<!-- Include the script that builds the page and powers Netlify CMS -->
+<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+<script>
+    // Validate image uploads — reject files over 500KB
+    (function() {
+      var MAX_SIZE = 512000; // 500KB
+  
+      function formatSize(bytes) {
+        if (bytes < 1024) return bytes + ' B';
+        if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+        return (bytes / 1048576).toFixed(1) + ' MB';
+      }
+  
+      function attachValidator(input) {
+        if (input._sizeValidated) return;
+        input._sizeValidated = true;
+        input.addEventListener('change', function() {
+          var files = input.files;
+          for (var i = 0; i < files.length; i++) {
+            if (files[i].size > MAX_SIZE) {
+              alert(
+                'Image too large!\n\n' +
+                '"' + files[i].name + '" is ' + formatSize(files[i].size) + '.\n' +
+                'Please resize it to under 500 KB before uploading. Try TinyPNG.com'
+              );
+              input.value = '';
+              return;
+            }
+          }
+        });
+      }
+  
+      // Watch for file inputs injected by Decap CMS
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          m.addedNodes.forEach(function(node) {
+            if (node.nodeType !== 1) return;
+            if (node.matches && node.matches('input[type="file"]')) {
+              attachValidator(node);
+            }
+            if (node.querySelectorAll) {
+              node.querySelectorAll('input[type="file"]').forEach(attachValidator);
+            }
+          });
+        });
+      });
+  
+      observer.observe(document.body, { childList: true, subtree: true });
+    })();
+  </script>
+
+  
+
+</body>
+</html>

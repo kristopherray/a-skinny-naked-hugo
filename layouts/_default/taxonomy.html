@@ -57,7 +57,7 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <article class="card h-100">
                         {{ with .Params.image }}
-                        <img src="{{ . }}" class="card-img-top" alt="{{ $.Title }}">
+                        {{ partial "img" (dict "src" . "alt" $.Title "class" "card-img-top" "width" 800 "loading" "lazy") }}
                         {{ end }}
                         <div class="card-body">
                             <h5 class="card-title">

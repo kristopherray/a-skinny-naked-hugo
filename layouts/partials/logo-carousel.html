@@ -7,7 +7,7 @@
             {{ range $logos }}
             <div class="logo-item">
                 {{ if .Params.image }}
-                <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" loading="lazy">
+                {{ partial "img" (dict "src" .Params.image "alt" .Title "width" 200 "height" 200 "loading" "lazy") }}
                 {{ end }}
             </div>
             {{ end }}
@@ -15,7 +15,7 @@
             {{ range $logos }}
             <div class="logo-item">
                 {{ if .Params.image }}
-                <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" loading="lazy">
+                {{ partial "img" (dict "src" .Params.image "alt" .Title "width" 200 "height" 200 "loading" "lazy") }}
                 {{ end }}
             </div>
             {{ end }}
@@ -23,7 +23,7 @@
             {{ range $logos }}
             <div class="logo-item">
                 {{ if .Params.image }}
-                <img src="{{ .Params.image | relURL }}" alt="{{ .Title }}" loading="lazy">
+                {{ partial "img" (dict "src" .Params.image "alt" .Title "width" 200 "height" 200 "loading" "lazy") }}
                 {{ end }}
             </div>
             {{ end }}

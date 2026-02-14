@@ -1,0 +1,79 @@
+{{/*
+  Reusable image partial with Hugo image processing + WebP generation.
+
+  Params:
+    src           - image path (e.g. "/img/photo.jpg")
+    alt           - alt text
+    class         - CSS classes for the <img> tag
+    width         - desired width in pixels
+    height        - desired height in pixels (if both width+height → Fill/crop)
+    loading       - "lazy" (default) or "eager"
+    fetchpriority - "high", "low", or "auto"
+*/}}
+
+{{ $src := .src | default "" }}
+{{ $alt := .alt | default "" }}
+{{ $class := .class | default "" }}
+{{ $width := .width | default 0 }}
+{{ $height := .height | default 0 }}
+{{ $loading := .loading | default "lazy" }}
+{{ $fetchpriority := .fetchpriority | default "" }}
+
+{{/* Strip leading slash so resources.Get can find it */}}
+{{ $path := strings.TrimPrefix "/" $src }}
+
+{{ $img := resources.Get $path }}
+
+{{ if $img }}
+  {{/* SVGs can't be processed — pass through as plain img */}}
+  {{ if eq $img.MediaType.SubType "svg" }}
+    <img src="{{ $img.RelPermalink }}"
+      alt="{{ $alt }}"
+      {{ with $class }}class="{{ . }}"{{ end }}
+      {{ if gt $width 0 }}width="{{ $width }}"{{ end }}
+      {{ if gt $height 0 }}height="{{ $height }}"{{ end }}
+      loading="{{ $loading }}"
+      {{ with $fetchpriority }}fetchpriority="{{ . }}"{{ end }}>
+  {{ else }}
+    {{/* Process the raster image */}}
+    {{ $processed := "" }}
+
+    {{ if and (gt $width 0) (gt $height 0) }}
+      {{/* Both dimensions → crop to exact size */}}
+      {{ $processed = $img.Fill (printf "%dx%d Center q80" $width $height) }}
+    {{ else if gt $width 0 }}
+      {{/* Width only → scale proportionally */}}
+      {{ $processed = $img.Resize (printf "%dx q80" $width) }}
+    {{ else if gt $img.Width 1200 }}
+      {{/* No dimensions specified but image is wider than 1200px → cap it */}}
+      {{ $processed = $img.Resize "1200x q80" }}
+    {{ else }}
+      {{/* Image is already small enough, just use it */}}
+      {{ $processed = $img }}
+    {{ end }}
+
+    {{/* Generate WebP version */}}
+    {{ $webp := $processed.Process "webp q80" }}
+
+    <picture>
+      <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+      <img src="{{ $processed.RelPermalink }}"
+        alt="{{ $alt }}"
+        {{ with $class }}class="{{ . }}"{{ end }}
+        width="{{ $processed.Width }}"
+        height="{{ $processed.Height }}"
+        loading="{{ $loading }}"
+        {{ with $fetchpriority }}fetchpriority="{{ . }}"{{ end }}>
+    </picture>
+  {{ end }}
+
+{{ else }}
+  {{/* Fallback: resource not found, render plain img tag */}}
+  <img src="{{ $src | relURL }}"
+    alt="{{ $alt }}"
+    {{ with $class }}class="{{ . }}"{{ end }}
+    {{ if gt $width 0 }}width="{{ $width }}"{{ end }}
+    {{ if gt $height 0 }}height="{{ $height }}"{{ end }}
+    loading="{{ $loading }}"
+    {{ with $fetchpriority }}fetchpriority="{{ . }}"{{ end }}>
+{{ end }}

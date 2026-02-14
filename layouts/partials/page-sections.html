@@ -11,7 +11,7 @@
 
                     {{ if .Params.image }}
                     <div class="bg-image">
-                        <img src='{{ .Params.image }}' class="img-fluid" alt="{{ .Site.Title }} - {{ .Title }} Image" loading="lazy">
+                        {{ partial "img" (dict "src" .Params.image "alt" (printf "%s - %s Image" .Site.Title .Title) "class" "img-fluid" "width" 1200 "loading" "lazy") }}
                     </div>
                     {{end}}
 
@@ -23,7 +23,7 @@
                         <div class="row {{ .Params.position }} ">
                             {{if .Params.section_image}}
                             <div class="col sectionImgCol gsap-item" data-gsap="fade">
-                                <img src="{{.Params.section_image}}" alt="{{ .Title }} {{ .Params.Site.Title }} Section Image" loading="lazy"/>
+                                {{ partial "img" (dict "src" .Params.section_image "alt" (printf "%s Section Image" .Title) "width" 800 "loading" "lazy") }}
                             </div>
                             {{end}}
                             <div class="col col-12 sectionColTxt {{ .Params.size }} gsap-item" data-gsap="fade">
