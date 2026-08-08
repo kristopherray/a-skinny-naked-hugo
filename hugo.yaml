@@ -1,6 +1,6 @@
 # Always Use with Trailing Slash - Update for Twitter before Launch
 baseURL: 'https://a-skinny-naked-hugo.netlify.app/'
-languageCode: 'en-us'
+locale: 'en-us'
 title: 'My New Hugo Site'
 
 sitemap:
@@ -36,7 +36,6 @@ markup:
       attribute:
         block: true
         title: true
-        wrapStandAloneImageWithinParagraph: false
       autoHeadingID: true
       autoHeadingIDType: github
       wrapStandAloneImageWithinParagraph: false

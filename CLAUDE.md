@@ -124,7 +124,7 @@ weight = 1
 The site is configured for deployment on Netlify via `netlify.toml`:
 - Build command: `hugo --gc --minify`
 - Publish directory: `public/`
-- Hugo version: 0.152.2 (extended)
+- Hugo version: 0.163.3 (extended)
 - **No Node.js required** - Bootstrap is vendored locally
 
 To deploy to Netlify:
@@ -136,3 +136,14 @@ To deploy to Netlify:
 **Note**: The `node_modules/` directory is excluded via `.gitignore` and is not needed for deployment.
 
 Before deploying, update `baseURL` in `hugo.yaml` to match your Netlify domain.
+
+## Content Management (CMS)
+
+The template ships with two CMS admin directories — sites use one or the other, never both:
+
+- `static/admin/` — **Decap CMS** (git-gateway backend via Netlify Identity). Includes a JS upload validator capping images at 500KB.
+- `static/admin-sveltia/` — **Sveltia CMS** (GitHub backend via the shared KRC auth Worker). See `/Users/kristopherray/Sites/KRC-SVELTIA-INFRASTRUCTURE.md` for the shared auth stack and per-client onboarding checklist.
+
+To deploy a Sveltia site: delete `static/admin/`, rename `static/admin-sveltia/` to `static/admin/`, set `backend.repo` in its `config.yml`, add the client's domains to the Worker's `ALLOWED_DOMAINS`, and add editors as outside collaborators (Write) on the client repo. Full steps are commented at the top of `static/admin-sveltia/config.yml`.
+
+Both configs define the same collections (Home, Logo Carousel, Home Sections, News, Global Site Settings) — keep them in sync when adding fields.

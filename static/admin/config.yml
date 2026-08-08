@@ -67,7 +67,7 @@ collections:
     files:
       - name: "config"
         label: "Global Site Settings"
-        file: "config.yaml"
+        file: "hugo.yaml"
         fields:
           - name: "params"
             label: "Params"

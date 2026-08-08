@@ -11,7 +11,7 @@ This "template" is cooked up as lightweight as possible with the latest Hugo and
 
 
 **Required Local Dependancies:**
-- [ >= Hugo v0.152.2 - Extended](https://github.com/gohugoio/hugo/releases/)
+- [ >= Hugo v0.163.3 - Extended](https://github.com/gohugoio/hugo/releases/)
 
 
 #### **To Run A Local Server With Hugo (with Hugo[extended] Installed Locally):**  

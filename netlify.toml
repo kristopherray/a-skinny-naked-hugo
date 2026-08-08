@@ -3,7 +3,7 @@
   command = "hugo --gc --minify && cp robots.production.txt public/robots.txt"
 
 [build.environment]
-  HUGO_VERSION = "0.152.2"
+  HUGO_VERSION = "0.163.3"
   HUGO_ENV = "production"
   HUGO_ENABLEGITINFO = "false"
 
@@ -14,7 +14,7 @@
   command = "hugo --gc --buildFuture && cp robots.staging.txt public/robots.txt"
 
 [context.deploy-preview.environment]
-  HUGO_VERSION = "0.141.0"
+  HUGO_VERSION = "0.163.3"
   HUGO_BUILD_DRAFTS = "true"
   HUGO_BUILD_EXPIRED = "false"
 
@@ -22,7 +22,7 @@
   command = "hugo --gc --buildFuture && cp robots.staging.txt public/robots.txt"
 
 [context.branch-deploy.environment]
-  HUGO_VERSION = "0.141.0"
+  HUGO_VERSION = "0.163.3"
   HUGO_BUILD_DRAFTS = "true"
   HUGO_BUILD_EXPIRED = "false"
 
