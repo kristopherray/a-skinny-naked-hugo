@@ -24,3 +24,6 @@ Thumbs.db
 # Node modules
 node_modules/
 package-lock.json
+
+# asdf local tool pins (Netlify uses HUGO_VERSION from netlify.toml)
+.tool-versions
